@@ -6,7 +6,8 @@ export default {
     extend: {
       colors: {
         accent: "#BC231D",
-        text: "#151515",
+        "dark-text": "#151515",
+        "light-text": "#ffff",
         box: "#EEEDEB",
       },
       fontFamily: {
