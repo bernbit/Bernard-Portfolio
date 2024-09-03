@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import useGeneral from "../context/useGeneral";
+import useGeneral from "../context/GeneralContext";
 import { Typewriter } from "react-simple-typewriter";
 
 function Sidebar() {
@@ -26,7 +26,7 @@ function Sidebar() {
 
   return (
     <nav
-      className={`smoother fixed z-30 grid h-full w-[55%] grid-rows-12 bg-box ${!showNav ? "-left-full" : "-left-0"} md:hidden`}
+      className={`smoother fixed z-30 grid h-full w-[55%] grid-rows-12 bg-secondary md:hidden dark:bg-dark-secondary ${!showNav ? "-left-full" : "-left-0"} `}
       ref={navbarRef}
     >
       <div className="row-span-1"></div>
@@ -36,7 +36,7 @@ function Sidebar() {
           {navOptions.map((option, index) => (
             <a
               href={`#${option.label.toLowerCase()}`}
-              className={`flex items-center gap-3 px-3 py-3 hover:cursor-pointer hover:bg-accent hover:text-light-text focus:bg-accent ${activeNav === index ? "bg-accent text-light-text" : "text-dark-text transition-all duration-75"}`}
+              className={`flex items-center gap-3 px-3 py-3 hover:cursor-pointer hover:bg-accent hover:text-light-text focus:bg-accent ${activeNav === index ? "bg-accent text-light-text" : "text-dark-text transition-all duration-75 dark:text-light-text"}`}
               key={index}
               onClick={() => handleActiveNav(index)}
             >

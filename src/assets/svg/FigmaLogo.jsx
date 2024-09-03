@@ -1,6 +1,6 @@
 import React from "react";
 
-function FigmaLogo({ width, height, fill = "#EDF2F4" }) {
+function FigmaLogo({ width, height, circle }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -9,7 +9,8 @@ function FigmaLogo({ width, height, fill = "#EDF2F4" }) {
       fill="none"
       viewBox="0 0 89 88"
     >
-      <rect width="88" height="88" x="0.5" fill={fill} rx="44"></rect>
+      {circle}
+
       <g clipPath="url(#clip0_78_30)">
         <path
           fill="#00BCFF"

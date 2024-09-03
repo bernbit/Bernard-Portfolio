@@ -1,6 +1,6 @@
 import React from "react";
 
-function ESPLogo({ width, height, fill = "#EDF2F4" }) {
+function ESPLogo({ width, height, circle }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -9,7 +9,8 @@ function ESPLogo({ width, height, fill = "#EDF2F4" }) {
       fill="none"
       viewBox="0 0 89 88"
     >
-      <rect width="88" height="88" x="0.5" fill={fill} rx="44"></rect>
+      {circle}
+
       <g fill="#E7352C" clipPath="url(#clip0_78_42)">
         <path d="M35.01 57.654a3.94 3.94 0 11-7.88 0 3.94 3.94 0 017.88 0zM69.371 53.555a40.828 40.828 0 00-34.6-34.6 25.9 25.9 0 00-5.723 4.125v3.806A32.418 32.418 0 0161.44 59.25h3.806a27.283 27.283 0 004.125-5.696z"></path>
         <path d="M72.459 41.605A25.603 25.603 0 0046.72 16c-.905 0-1.783 0-2.662.133l-.585 1.704a44.05 44.05 0 0126.988 26.961l1.704-.612c0-.852.16-1.703.16-2.661M47.014 71.893a30.449 30.449 0 01-30.449-30.315 30.233 30.233 0 018.916-21.532l1.73 1.623a28.106 28.106 0 000 39.924 28.106 28.106 0 0039.924 0l1.624 1.623a30.21 30.21 0 01-21.745 8.677z"></path>

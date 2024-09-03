@@ -23,11 +23,13 @@ export function GeneralProvider({ children }) {
   const mainContainerRef = useRef(null);
   const homeRef = useRef(null);
   const aboutRef = useRef(null);
+  const projectRef = useRef(null);
 
   //   useStates
   const [showNav, setShowNav] = useState(false);
   const [activeNav, setActiveNav] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   //   Funtions
   const handleActiveNav = (index) => {
@@ -37,7 +39,17 @@ export function GeneralProvider({ children }) {
   const handleShowNav = () => {
     setShowNav(!showNav);
   };
-
+  const handleDarkMode = () => {
+    if (document.documentElement.classList.contains("dark")) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+      setDarkMode(false);
+      return;
+    }
+    document.documentElement.classList.add("dark");
+    localStorage.setItem("theme", "dark");
+    setDarkMode(true);
+  };
   //   useEffects
   useEffect(() => {
     const handleScroll = () => {
@@ -51,12 +63,15 @@ export function GeneralProvider({ children }) {
 
       const homeTop = homeRef.current.getBoundingClientRect().top;
       const aboutTop = aboutRef.current.getBoundingClientRect().top;
+      const projectTop = projectRef.current.getBoundingClientRect().top;
       // Add other sections similarly
 
-      if (homeTop <= 100 && homeTop > -window.innerHeight / 2) {
+      if (homeTop <= 60 && homeTop > -window.innerHeight / 2) {
         setActiveNav(0);
-      } else if (aboutTop <= 100 && aboutTop > -window.innerHeight / 2) {
+      } else if (aboutTop <= 60 && aboutTop > -window.innerHeight / 2) {
         setActiveNav(1);
+      } else if (projectTop <= 60 && projectTop > -window.innerHeight) {
+        setActiveNav(2);
       }
     };
 
@@ -66,6 +81,27 @@ export function GeneralProvider({ children }) {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    // Themes
+    const userTheme = localStorage.getItem("theme");
+    const systemTheme = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
+
+    // Initial Theme Check
+    const themeCheck = () => {
+      if (userTheme === "dark" || (!userTheme && systemTheme)) {
+        document.documentElement.classList.add("dark");
+        setDarkMode(true);
+        return;
+      }
+
+      setDarkMode(false);
+    };
+
+    themeCheck();
+  }, [darkMode]);
 
   const value = {
     showNav,
@@ -80,6 +116,10 @@ export function GeneralProvider({ children }) {
     mainContainerRef,
     homeRef,
     aboutRef,
+    projectRef,
+    darkMode,
+    setDarkMode,
+    handleDarkMode,
   };
 
   return (

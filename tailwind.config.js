@@ -5,10 +5,25 @@ export default {
   theme: {
     extend: {
       colors: {
-        accent: "#BC231D",
-        "dark-text": "#151515",
+        // Light Theme Color
+        primary: "#FFFFFF",
+        secondary: "#ECF0F3",
+        tertiary: "#F6F8F9",
+        "dark-text": "#111519",
+        extra: "#d1d5db",
+
+        // Dark Theme Color
+        "dark-primary": "#111519",
+        "dark-secondary": "#0C0E11",
+        "dark-tertiary": "#1A2026",
         "light-text": "#ffff",
-        box: "#EEEDEB",
+
+        // Supporting Colors
+        accent: "#CC001F",
+        beewatch: "#FDE767",
+        enviromentrix: "#05BFDB",
+        "campus-echo": "#15F5BA",
+        "supporting-color": "#A6ADBB",
       },
       fontFamily: {
         "clash-display": ["ClashDisplay", "sans-serif"],
@@ -25,7 +40,22 @@ export default {
           "50%": { transform: "translateY(-7px)" },
         },
       },
+      boxShadow: {
+        custom: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;",
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require("daisyui"),
+    function ({ addUtilities }) {
+      const newUtilities = {
+        ".text-stroke": {
+          "-webkit-text-stroke-width": ".75px",
+          "-webkit-text-fill-color": "#F6F8F9",
+        },
+      };
+
+      addUtilities(newUtilities, ["responsive", "hover"]);
+    },
+  ],
 };

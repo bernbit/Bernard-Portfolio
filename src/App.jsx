@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from "react";
-import useGeneral from "./context/useGeneral";
+import useGeneral from "./context/GeneralContext";
 // Pages
 import Home from "./pages/Home";
 import About from "./pages/About";
+import Projects from "./pages/Projects";
 //Components
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div
-      className={`relative h-screen grid-rows-12 flex-col font-archivo`}
+      className={`relative h-screen grid-rows-12 flex-col font-archivo text-dark-text dark:text-secondary`}
       ref={mainContainerRef}
     >
       <ThemeButton />
@@ -22,10 +22,11 @@ function App() {
 
       {/* Home */}
       <main
-        className={`smoother ${showNav ? "pointer-events-none cursor-not-allowed select-none blur-sm" : ""}`}
+        className={`bg-primary dark:bg-dark-primary ${showNav ? "pointer-events-none cursor-not-allowed select-none blur-sm" : ""}`}
       >
         <Home />
         <About />
+        <Projects />
       </main>
     </div>
   );
