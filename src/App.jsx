@@ -3,6 +3,8 @@ import useGeneral from "./context/GeneralContext";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
+import Testimonials from "./pages/Testimonials";
+import Contact from "./pages/Contact";
 //Components
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
@@ -27,6 +29,8 @@ function App() {
         <Home />
         <About />
         <Projects />
+        <Testimonials />
+        <Contact />
       </main>
     </div>
   );

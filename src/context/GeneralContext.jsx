@@ -5,7 +5,7 @@ import React, {
   useRef,
   useEffect,
 } from "react";
-import { MdHome, MdInfo, MdCode, MdContacts } from "react-icons/md";
+import { MdHome, MdInfo, MdCode, MdContacts, MdReviews } from "react-icons/md";
 
 //* Create a Context
 const GeneralContext = createContext();
@@ -16,22 +16,25 @@ export function GeneralProvider({ children }) {
     { icon: <MdHome className="text-2xl" />, label: "Home" },
     { icon: <MdInfo className="text-2xl" />, label: "About" },
     { icon: <MdCode className="text-2xl" />, label: "Projects" },
+    { icon: <MdReviews className="text-2xl" />, label: "Testimonials" },
     { icon: <MdContacts className="text-2xl" />, label: "Contact" },
   ];
 
-  //   useRefs
+  //*   useRefs
   const mainContainerRef = useRef(null);
   const homeRef = useRef(null);
   const aboutRef = useRef(null);
   const projectRef = useRef(null);
+  const testimonialRef = useRef(null);
+  const contactRef = useRef(null);
 
-  //   useStates
+  //*   useStates
   const [showNav, setShowNav] = useState(false);
   const [activeNav, setActiveNav] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
 
-  //   Funtions
+  //*   Funtions
   const handleActiveNav = (index) => {
     setActiveNav(index);
     setShowNav(false);
@@ -50,7 +53,9 @@ export function GeneralProvider({ children }) {
     localStorage.setItem("theme", "dark");
     setDarkMode(true);
   };
-  //   useEffects
+
+  //* useEffects
+  //useEffect for Navbar
   useEffect(() => {
     const handleScroll = () => {
       const scrollThreshold = 100;
@@ -64,14 +69,23 @@ export function GeneralProvider({ children }) {
       const homeTop = homeRef.current.getBoundingClientRect().top;
       const aboutTop = aboutRef.current.getBoundingClientRect().top;
       const projectTop = projectRef.current.getBoundingClientRect().top;
+      const testimonialTop = testimonialRef.current.getBoundingClientRect().top;
+      const contactTop = contactRef.current.getBoundingClientRect().top;
       // Add other sections similarly
 
       if (homeTop <= 60 && homeTop > -window.innerHeight / 2) {
         setActiveNav(0);
       } else if (aboutTop <= 60 && aboutTop > -window.innerHeight / 2) {
         setActiveNav(1);
-      } else if (projectTop <= 60 && projectTop > -window.innerHeight) {
+      } else if (projectTop <= 60 && projectTop > -window.innerHeight / 2) {
         setActiveNav(2);
+      } else if (
+        testimonialTop <= 60 &&
+        testimonialTop > -window.innerHeight / 2
+      ) {
+        setActiveNav(3);
+      } else if (contactTop <= 60 && contactTop > -window.innerHeight / 2) {
+        setActiveNav(4);
       }
     };
 
@@ -82,6 +96,7 @@ export function GeneralProvider({ children }) {
     };
   }, []);
 
+  // useEffect for Dark Mode
   useEffect(() => {
     // Themes
     const userTheme = localStorage.getItem("theme");
@@ -117,6 +132,8 @@ export function GeneralProvider({ children }) {
     homeRef,
     aboutRef,
     projectRef,
+    testimonialRef,
+    contactRef,
     darkMode,
     setDarkMode,
     handleDarkMode,

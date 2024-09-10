@@ -158,12 +158,12 @@ function Home() {
           <button className="rounded-md bg-accent px-6 py-3 text-light-text">
             View Resume
           </button>
-          <button className="flex items-center px-6 py-3">
+          <a href="#projects" className="flex items-center gap-2 px-6 py-3">
             Projects{" "}
             <span>
               <MdArrowOutward />
             </span>
-          </button>
+          </a>
         </div>
       </div>
     </section>

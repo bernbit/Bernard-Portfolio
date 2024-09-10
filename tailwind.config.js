@@ -23,6 +23,8 @@ export default {
         beewatch: "#FDE767",
         enviromentrix: "#05BFDB",
         "campus-echo": "#15F5BA",
+        "variety-verse": "#F48668",
+        ttt: "#92DCE5",
         "supporting-color": "#A6ADBB",
       },
       fontFamily: {

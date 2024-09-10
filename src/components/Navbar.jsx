@@ -24,17 +24,18 @@ function Navbar() {
           <a href="#home">Bernard</a>
         </h1>
       </div>
-      <ul className="hidden grow justify-end gap-8 text-lg font-medium md:flex">
+      <div className="hidden grow justify-end gap-8 text-lg font-medium md:flex">
         {navOptions.map((option, index) => (
-          <li
-            className={`${activeNav === index ? "text-accent" : ""} hover:cursor-pointer hover:text-accent hover:opacity-75`}
+          <a
+            className={`${activeNav === index ? "text-accent" : ""} py-2 hover:cursor-pointer hover:text-accent hover:opacity-75`}
             key={index}
             onClick={() => handleActiveNav(index)}
+            href={`#${option.label.toLowerCase()}`}
           >
-            <a href={`#${option.label.toLowerCase()}`}>{option.label}</a>
-          </li>
+            {option.label}
+          </a>
         ))}
-      </ul>
+      </div>
 
       {/* Hamburger Menu */}
       <label className="hamburger md:hidden">

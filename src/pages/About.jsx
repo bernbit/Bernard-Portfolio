@@ -7,7 +7,11 @@ function About() {
   const { aboutRef } = useGeneral();
 
   return (
-    <section className="px-5 py-10 lg:px-40" id="about" ref={aboutRef}>
+    <section
+      className="scroll-m-12 px-5 py-10 lg:px-40"
+      id="about"
+      ref={aboutRef}
+    >
       <div className="text-center">
         <p className="font-clash-display text-2xl font-bold uppercase tracking-wider md:text-3xl">
           About Me
