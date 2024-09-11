@@ -136,7 +136,7 @@ html {
 }
 
 .border-test {
-  border: 1px red solid;
+  border: 1px yellow solid;
 }
 
 .text-align-last {
@@ -151,4 +151,37 @@ html {
   .text-align-last {
     text-align-last: start;
   }
+}
+
+/* Sweet Alert Customize Style */
+.custom-swal-container {
+  width: 100%;
+}
+
+.custom-modal-box {
+  border-radius: 0.5rem;
+}
+
+.swal2-confirm {
+  padding-right: 50px !important;
+  padding-left: 50px !important;
+  border-radius: 0.5rem;
+}
+
+#swal2-html-container,
+#swal2-title {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+div:where(.swal2-container) div:where(.swal2-popup) {
+  max-width: 80% !important;
+}
+
+div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm:focus {
+  box-shadow: none !important;
+}
+
+.swal-custom-padding {
+  padding: 5px 13px 12px 13px;
 }

@@ -48,7 +48,6 @@ export default {
     },
   },
   plugins: [
-    require("daisyui"),
     function ({ addUtilities }) {
       const newUtilities = {
         ".text-stroke": {
