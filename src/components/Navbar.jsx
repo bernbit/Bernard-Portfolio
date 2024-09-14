@@ -17,7 +17,7 @@ function Navbar() {
       className={`fixed left-1/2 z-40 row-span-1 flex -translate-x-1/2 transform items-center px-5 py-2 transition-all duration-200 ease-out lg:px-40 ${isScrolled || showNav ? "bg-secondary dark:bg-dark-secondary" : "bg-primary dark:bg-dark-primary"} ${isScrolled ? "top-0 w-full rounded-none" : "top-6 w-5/6 rounded-full"} ${!isScrolled || showNav ? "shadow-custom dark:shadow-none" : "shadow-none"} ${!isScrolled && showNav ? "border border-gray-600" : "border-none"}`}
     >
       <div className="flex grow items-center gap-3">
-        <a href="#home">
+        <a href="/">
           <BernardLogo width={50} height={50} />
         </a>
         <h1 className="font-clash-display text-2xl font-semibold tracking-wide">

@@ -9,6 +9,8 @@ import {
 } from "react-icons/fa6";
 import Swal from "sweetalert2";
 
+import { useInView } from "react-intersection-observer";
+
 function Contact() {
   const { contactRef, darkMode } = useGeneral();
   const contactInfo = [
@@ -25,7 +27,7 @@ function Contact() {
       icon: MdLocationOn,
     },
   ];
-  const socialMedia = [
+  const platforms = [
     {
       title: "Linkedin",
       icon: FaLinkedinIn,
@@ -128,13 +130,24 @@ function Contact() {
     }
   };
 
+  const { ref: contactTitleRef, inView: contactTitle } = useInView({
+    threshold: 0,
+  });
+
+  const { ref: contactBoxRef, inView: contactBox } = useInView({
+    threshold: 0,
+  });
+
   return (
     <section
       className="scroll-m-12 px-5 py-10 lg:px-40"
       id="contact"
       ref={contactRef}
     >
-      <div className="mb-10 pb-5 text-center">
+      <div
+        className={`mb-10 pb-5 text-center ${contactTitle ? "animate__animated animate__fadeInUp" : "opacity-0"}`}
+        ref={contactTitleRef}
+      >
         <p className="font-clash-display text-2xl font-bold uppercase tracking-wider md:text-3xl">
           Contact Me
         </p>
@@ -144,7 +157,10 @@ function Contact() {
         </p>
       </div>
 
-      <div className="flex flex-col gap-10 rounded-md border border-extra bg-tertiary p-7 shadow-custom dark:border-none dark:bg-dark-tertiary dark:shadow-none md:flex-row">
+      <div
+        className={`flex flex-col gap-10 rounded-md border border-extra bg-tertiary p-7 shadow-custom dark:border-none dark:bg-dark-tertiary dark:shadow-none md:flex-row ${contactBox ? "animate__animated animate__fadeInUp" : "opacity-0"}`}
+        ref={contactBoxRef}
+      >
         <div className="flex basis-4/12 flex-col gap-4">
           <p className="text-2xl font-semibold">
             Let's talk on something <span className="text-accent">great </span>
@@ -159,15 +175,15 @@ function Contact() {
             ))}
           </div>
           <div className="flex items-center gap-3">
-            {socialMedia.map((sm, index) => (
+            {platforms.map((platform, index) => (
               <a
                 className="rounded-full bg-primary p-2 shadow-custom hover:cursor-pointer hover:opacity-70 dark:bg-dark-primary dark:shadow-none"
-                href={sm.link}
+                href={platform.link}
                 target="_blank"
-                name={sm.title}
+                name={platform.title}
                 key={index}
               >
-                <sm.icon className="bg-clip-content text-2xl text-accent" />
+                <platform.icon className="bg-clip-content text-2xl text-accent" />
               </a>
             ))}
           </div>
@@ -220,7 +236,7 @@ function Contact() {
           />
 
           <textarea
-            className="h-[200px] rounded-md bg-primary px-4 py-2 outline-none dark:bg-dark-primary"
+            className="h-[125px] rounded-md bg-primary px-4 py-2 outline-none dark:bg-dark-primary"
             onChange={handleChange}
             name="message"
             value={formData.message}

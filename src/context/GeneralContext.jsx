@@ -6,7 +6,7 @@ import React, {
   useEffect,
 } from "react";
 import { MdHome, MdInfo, MdCode, MdContacts, MdReviews } from "react-icons/md";
-
+import Loader from "../pages/Loader";
 //* Create a Context
 const GeneralContext = createContext();
 
@@ -33,6 +33,7 @@ export function GeneralProvider({ children }) {
   const [activeNav, setActiveNav] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   //*   Funtions
   const handleActiveNav = (index) => {
@@ -118,6 +119,15 @@ export function GeneralProvider({ children }) {
     themeCheck();
   }, [darkMode]);
 
+  // use for PreLoader
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1700);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const value = {
     showNav,
     setShowNav,
@@ -140,7 +150,9 @@ export function GeneralProvider({ children }) {
   };
 
   return (
-    <GeneralContext.Provider value={value}>{children}</GeneralContext.Provider>
+    <GeneralContext.Provider value={value}>
+      {loading ? <Loader /> : children}
+    </GeneralContext.Provider>
   );
 }
 

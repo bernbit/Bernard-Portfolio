@@ -16,6 +16,8 @@ import GitLogo from "../assets/svg/GitLogo";
 import GitHubLogo from "../assets/svg/GitHubLogo";
 import VSCodeLogo from "../assets/svg/VSCodeLogo";
 
+import { useInView } from "react-intersection-observer";
+
 function Technology() {
   const technologies = [
     { logo: HTMLLogo, title: "HTML" },
@@ -36,11 +38,28 @@ function Technology() {
     { logo: VSCodeLogo, title: "VS Code" },
   ];
 
+  const { ref: techTitleRef, inView: techTitle } = useInView({
+    threshold: 0,
+  });
+  const { ref: techBoxRef, inView: techBox } = useInView({
+    threshold: 0.2,
+  });
+
   return (
     <div className="pt-2">
-      <p className="pb-2 text-lg font-bold uppercase md:text-xl">Technology</p>
+      <p
+        className={`pb-2 text-lg font-bold uppercase md:text-xl ${
+          techTitle ? "animate__animated animate__fadeInUp" : "opacity-0"
+        }`}
+        ref={techTitleRef}
+      >
+        Technology
+      </p>
 
-      <div className="transform rounded-md border border-extra bg-tertiary px-5 py-7 shadow-custom transition-transform duration-150 hover:scale-[1.03] dark:border-none dark:bg-dark-tertiary dark:shadow-none">
+      <div
+        className={`transform rounded-md border border-extra bg-tertiary px-5 py-7 shadow-custom transition-transform duration-150 hover:scale-[1.03] dark:border-none dark:bg-dark-tertiary dark:shadow-none ${techBox ? "animate__animated animate__fadeInUp" : "opacity-0"}`}
+        ref={techBoxRef}
+      >
         <div className="grid grid-cols-4 gap-y-5 md:grid-cols-8">
           {technologies.map((technology, index) => (
             <div

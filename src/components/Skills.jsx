@@ -2,6 +2,7 @@ import React from "react";
 import FrontEndLogo from "../assets/svg/FrontEndLogo";
 import Web_GraphicLogo from "../assets/svg/Web_GraphicLogo";
 import IoTLogo from "../assets/svg/IoTLogo";
+import { useInView } from "react-intersection-observer";
 
 function Skills() {
   const skills = [
@@ -75,40 +76,59 @@ function Skills() {
     },
   ];
 
+  const { ref: skillTitleRef, inView: skillTitle } = useInView({
+    threshold: 0.2,
+  });
+
   return (
     <div className="py-5">
-      <p className="pb-2 text-lg font-bold uppercase md:text-xl">Skills</p>
-      <div className="flex flex-col gap-7">
-        {skills.map((skill, index) => (
-          <div
-            className="transform rounded-md border border-extra bg-tertiary px-5 py-7 shadow-custom transition-transform duration-150 hover:scale-[1.03] dark:border-none dark:bg-dark-tertiary dark:shadow-none"
-            key={index}
-          >
-            <div className="flex items-center gap-5">
-              <skill.icon width={55} height={55} />
-              <p className="relative font-clash-display text-[1.05rem] font-semibold uppercase tracking-widest md:text-xl">
-                <span
-                  className={`absolute -left-1.5 top-3.5 z-0 h-[10px] w-[104%] ${skill.color}`}
-                ></span>
-                <span className="relative z-10 whitespace-nowrap font-semibold text-dark-text dark:font-bold dark:text-gray-700 dark:text-stroke">
-                  {skill.title}
-                </span>
-              </p>
-            </div>
+      <p
+        className={`pb-2 text-lg font-bold uppercase md:text-xl ${
+          skillTitle ? "animate__animated animate__fadeInUp" : "opacity-0"
+        }`}
+        ref={skillTitleRef}
+      >
+        Skills
+      </p>
+      <div className={`flex flex-col gap-7`}>
+        {skills.map((skill, index) => {
+          const { ref: skillBoxRef, inView: skillBox } = useInView({
+            // threshold: 0.2,
+            initialInView: true,
+          });
 
-            <div className="flex gap-5 pt-5">
-              <div className="flex flex-col items-center px-2 font-fira-code text-sm text-gray-400">
-                <p className="">{"<h3>"}</p>
-                <p className="dark-text h-full border-l-2 border-gray-400"></p>
-                <p className="whitespace-nowrap">{"</h3>"}</p>
+          return (
+            <div
+              key={index}
+              ref={skillBoxRef}
+              className={`transform rounded-md border border-extra bg-tertiary px-5 py-7 shadow-custom transition-transform duration-150 hover:scale-[1.03] dark:border-none dark:bg-dark-tertiary dark:shadow-none ${skillBox ? "animate__animated animate__fadeInUp" : "opacity-0"}`}
+            >
+              <div className="flex items-center gap-5">
+                <skill.icon width={55} height={55} />
+                <p className="relative font-clash-display text-[1.05rem] font-semibold uppercase tracking-widest md:text-xl">
+                  <span
+                    className={`absolute -left-1.5 top-3.5 z-0 h-[10px] w-[104%] ${skill.color}`}
+                  ></span>
+                  <span className="relative z-10 whitespace-nowrap font-semibold text-dark-text dark:font-bold dark:text-gray-700 dark:text-stroke">
+                    {skill.title}
+                  </span>
+                </p>
               </div>
 
-              <div className="py-6 text-justify text-base font-light leading-[1.85rem] md:text-lg">
-                {skill.description}
+              <div className="flex gap-5 pt-5">
+                <div className="flex flex-col items-center px-2 font-fira-code text-sm text-gray-400">
+                  <p className="">{"<h3>"}</p>
+                  <p className="dark-text h-full border-l-2 border-gray-400"></p>
+                  <p className="whitespace-nowrap">{"</h3>"}</p>
+                </div>
+
+                <div className="py-6 text-justify text-base font-light leading-[1.85rem] md:text-lg">
+                  {skill.description}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

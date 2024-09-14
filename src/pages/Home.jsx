@@ -5,6 +5,7 @@ import { Typewriter } from "react-simple-typewriter";
 import HeroPic from "../assets/img/HeroPic.png";
 import { MdArrowOutward } from "react-icons/md";
 
+// Technology Logo
 import ReactLogo from "../assets/svg/ReactLogo";
 import TailwindLogo from "../assets/svg/TailwindLogo";
 import FigmaLogo from "../assets/svg/FigmaLogo";
@@ -15,15 +16,54 @@ import JSLogo from "../assets/svg/JSLogo";
 import ESPLogo from "../assets/svg/ESPLogo";
 import ArduinoLogo from "../assets/svg/ArduinoLogo";
 
+import { useInView } from "react-intersection-observer";
+
 function Home() {
   const { homeRef } = useGeneral();
+  const logos = [
+    {
+      component: ReactLogo,
+      position: "left-20 top-1 -translate-y-1",
+    },
+    {
+      component: TailwindLogo,
+      position: "right-10 top-1 -translate-y-1",
+    },
+    {
+      component: FigmaLogo,
+      position: "-right-3 top-[45%] -translate-y-[45%]",
+    },
+    {
+      component: PhotoshopLogo,
+      position: "-left-3 top-[45%] -translate-y-[45%]",
+    },
+    {
+      component: ArduinoLogo,
+      position: "left-20 top-[93%] -translate-y-[93%]",
+    },
+    {
+      component: JSLogo,
+      position: "right-10 top-[93%] -translate-y-[93%]",
+    },
+  ];
+
+  const { ref: homeHeroRef, inView: homeHero } = useInView({
+    threshold: 0.2,
+  });
+  const { ref: homeCaptionRef, inView: homeCaption } = useInView({
+    threshold: 0.2,
+  });
+
   return (
     <section
-      className="flex flex-col items-center gap-16 bg-secondary px-5 pb-10 pt-32 dark:bg-dark-secondary lg:h-[101vh] lg:flex-row lg:px-40 lg:pt-28"
+      className="flex flex-col items-center gap-16 overflow-hidden bg-secondary px-5 pb-10 pt-32 dark:bg-dark-secondary lg:h-[101vh] lg:flex-row lg:px-40 lg:pt-28"
       id="home"
       ref={homeRef}
     >
-      <div className="relative flex basis-5/12 items-center justify-center">
+      <div
+        className={`relative flex basis-5/12 items-center justify-center ${homeHero ? "animate__animated animate__fadeInLeft" : "opacity-0"}`}
+        ref={homeHeroRef}
+      >
         <img
           src={HeroPic}
           alt="Hero Image"
@@ -31,95 +71,32 @@ function Home() {
           width={420}
           height={420}
         />
-        <div className="absolute left-20 top-1 -translate-y-1 animate-float drop-shadow-lg">
-          <ReactLogo
-            width={55}
-            height={55}
-            circle={
-              <rect
-                width="88"
-                height="88"
-                rx="44"
-                className="fill-tertiary dark:fill-dark-tertiary"
-              ></rect>
-            }
-          />
-        </div>
-        <div className="absolute right-10 top-1 -translate-y-1 animate-float drop-shadow-lg">
-          <TailwindLogo
-            width={55}
-            height={55}
-            circle={
-              <rect
-                width="88"
-                height="88"
-                rx="44"
-                className="fill-tertiary dark:fill-dark-tertiary"
-              ></rect>
-            }
-          />
-        </div>
 
-        <div className="absolute -right-3 top-[45%] -translate-y-[45%] animate-float drop-shadow-lg">
-          <FigmaLogo
-            width={55}
-            height={55}
-            circle={
-              <rect
-                width="88"
-                height="88"
-                rx="44"
-                className="fill-tertiary dark:fill-dark-tertiary"
-              ></rect>
-            }
-          />
-        </div>
-
-        <div className="absolute -left-3 top-[45%] -translate-y-[45%] animate-float drop-shadow-lg">
-          <PhotoshopLogo
-            width={55}
-            height={55}
-            circle={
-              <rect
-                width="88"
-                height="88"
-                rx="44"
-                className="fill-tertiary dark:fill-dark-tertiary"
-              ></rect>
-            }
-          />
-        </div>
-        <div className="absolute left-20 top-[93%] -translate-y-[93%] animate-float drop-shadow-lg">
-          <ArduinoLogo
-            width={55}
-            height={55}
-            circle={
-              <rect
-                width="88"
-                height="88"
-                rx="44"
-                className="fill-tertiary dark:fill-dark-tertiary"
-              ></rect>
-            }
-          />
-        </div>
-        <div className="absolute right-10 top-[93%] -translate-y-[93%] animate-float drop-shadow-lg">
-          <JSLogo
-            width={55}
-            height={55}
-            circle={
-              <rect
-                width="88"
-                height="88"
-                rx="44"
-                className="fill-tertiary dark:fill-dark-tertiary"
-              ></rect>
-            }
-          />
-        </div>
+        {logos.map((logo, index) => (
+          <div
+            key={index}
+            className={`absolute ${logo.position} animate-float drop-shadow-lg`}
+          >
+            <logo.component
+              width={55}
+              height={55}
+              circle={
+                <rect
+                  width="88"
+                  height="88"
+                  rx="44"
+                  className="fill-tertiary dark:fill-dark-tertiary"
+                />
+              }
+            />
+          </div>
+        ))}
       </div>
 
-      <div className="flex basis-7/12 flex-col items-center gap-2 lg:items-start">
+      <div
+        className={`flex basis-7/12 flex-col items-center gap-2 lg:items-start ${homeCaption ? "animate__animated animate__fadeInRight" : "opacity-0"}`}
+        ref={homeCaptionRef}
+      >
         <p>
           <span className="font-fira-code">---- </span>
           Hello I'm

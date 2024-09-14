@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import useGeneral from "../context/GeneralContext";
-import BeeWatch from "../assets/img/BeeWatch.png";
-import Bee from "../assets/img/Bee.png";
-// import Phone from "../assets/img/Phone.png";
 import { MdPhoneIphone, MdComputer } from "react-icons/md";
 
 import Laptop from "../assets/svg/Laptop";
 import Phone from "../assets/svg/Phone";
 //BeeWatch
-import BeeWatch_SS1 from "../assets/img/BeeWatch_SS1.jpg";
+import BeeWatch_SS1 from "../assets/img/BeeWatch/BeeWatch_SS1.jpg";
 import BeeWatchPhone_SS1 from "../assets/img/BeeWatch/BeeWatchPhone_SS1.jpg";
 import BeeWatchPhone_SS3 from "../assets/img/BeeWatch/BeeWatchPhone_SS3.jpg";
 //Enviromentrix
@@ -27,6 +24,8 @@ import VarietyVersePhone_SS2 from "../assets/img/VarietyVerse/VarietyVersePhone_
 import TTT_SS1 from "../assets/img/TTT/TTT_SS1.jpg";
 import TTTPhone_SS1 from "../assets/img/TTT/TTTPhone_SS1.jpg";
 import TTTPhone_SS2 from "../assets/img/TTT/TTTPhone_SS2.jpg";
+
+import { useInView } from "react-intersection-observer";
 
 function Projects() {
   const projects = [
@@ -138,13 +137,20 @@ function Projects() {
     setShowPhone(showPhoneCopy);
   };
 
+  const { ref: projectTitleRef, inView: projectTitle } = useInView({
+    threshold: 0,
+  });
+
   return (
     <section
-      className="scroll-m-12 px-5 py-10 lg:px-40"
+      className="scroll-m-12 overflow-hidden px-5 py-10 lg:px-40"
       id="projects"
       ref={projectRef}
     >
-      <div className="pb-5 text-center">
+      <div
+        className={`pb-5 text-center ${projectTitle ? "animate__animated animate__fadeInUp" : "opacity-0"}`}
+        ref={projectTitleRef}
+      >
         <p className="font-clash-display text-2xl font-bold uppercase tracking-wider md:text-3xl">
           Projects
         </p>
@@ -154,73 +160,86 @@ function Projects() {
         </p>
       </div>
 
-      {projects.map((project, index) => (
-        <div
-          className="mt-7 flex flex-col overflow-hidden rounded-md border border-extra bg-tertiary shadow-custom dark:border-none dark:bg-dark-tertiary dark:shadow-none md:items-center md:justify-center md:p-10 lg:flex-row"
-          key={index}
-        >
-          <div className="relative flex h-96 items-center justify-center p-2 px-5 lg:w-6/12">
-            {/* Toggle Device View */}
-            {showPhone[index] ? (
-              <div className="flex justify-between gap-5">
-                <Phone img={project.phoneImg} />
-                <div className="hidden md:block">
-                  <Phone img={project.phoneImg2} />
+      {projects.map((project, index) => {
+        const { ref: projectBoxRef, inView: projectBox } = useInView({
+          threshold: 0.1,
+        });
+
+        const projectAnimation = projectBox
+          ? index % 2 === 0
+            ? "animate__animated animate__fadeInLeft"
+            : "animate__animated animate__fadeInRight"
+          : "opacity-0";
+
+        return (
+          <div
+            className={`mt-7 flex flex-col overflow-hidden rounded-md border border-extra bg-tertiary shadow-custom dark:border-none dark:bg-dark-tertiary dark:shadow-none md:items-center md:justify-center md:p-10 lg:flex-row ${projectAnimation}`}
+            key={index}
+            ref={projectBoxRef}
+          >
+            <div className="relative flex h-96 items-center justify-center p-2 px-5 lg:w-6/12">
+              {/* Toggle Device View */}
+              {showPhone[index] ? (
+                <div className="flex justify-between gap-5">
+                  <Phone img={project.phoneImg} />
+                  <div className="hidden md:block">
+                    <Phone img={project.phoneImg2} />
+                  </div>
+                </div>
+              ) : (
+                <Laptop img={project.desktopImg} />
+              )}
+
+              {/* Toggle Device Icon */}
+              {showPhone[index] ? (
+                <MdComputer
+                  className={`${project.color} absolute right-0 top-0 m-2 rounded-full p-2 text-5xl dark:text-dark-text`}
+                  onClick={() => handleShowPhone(index)}
+                />
+              ) : (
+                <MdPhoneIphone
+                  className={`${project.color} absolute right-0 top-0 m-2 rounded-full p-2 text-5xl dark:text-dark-text`}
+                  onClick={() => handleShowPhone(index)}
+                />
+              )}
+            </div>
+
+            <div className="flex flex-col justify-center gap-10 lg:w-6/12">
+              <div className="flex flex-col gap-3 px-10">
+                <p className="relative w-fit text-2xl font-bold tracking-widest md:text-3xl">
+                  <span
+                    className={`${project.color} absolute -left-1.5 top-5 z-0 h-[10px] w-[106%] md:top-6`}
+                  ></span>
+                  <span className="relative z-10 dark:font-[800] dark:text-gray-700 dark:text-stroke">
+                    {project.title}
+                  </span>
+                </p>
+
+                {project.description}
+
+                <div className="flex flex-wrap justify-center gap-2">
+                  {project.techology.map((tech, index) => (
+                    <p
+                      className={`${project.color} w-fit rounded-full px-5 py-1 dark:text-dark-text`}
+                      key={index}
+                    >
+                      {tech}
+                    </p>
+                  ))}
                 </div>
               </div>
-            ) : (
-              <Laptop img={project.desktopImg} />
-            )}
 
-            {/* Toggle Device Icon */}
-            {showPhone[index] ? (
-              <MdComputer
-                className={`${project.color} absolute right-0 top-0 m-2 rounded-full p-2 text-5xl dark:text-dark-text`}
-                onClick={() => handleShowPhone(index)}
-              />
-            ) : (
-              <MdPhoneIphone
-                className={`${project.color} absolute right-0 top-0 m-2 rounded-full p-2 text-5xl dark:text-dark-text`}
-                onClick={() => handleShowPhone(index)}
-              />
-            )}
-          </div>
-
-          <div className="flex flex-col justify-center gap-10 lg:w-6/12">
-            <div className="flex flex-col gap-3 px-10">
-              <p className="relative w-fit text-2xl font-bold tracking-widest md:text-3xl">
-                <span
-                  className={`${project.color} absolute -left-1.5 top-5 z-0 h-[10px] w-[106%] md:top-6`}
-                ></span>
-                <span className="relative z-10 dark:font-[800] dark:text-gray-700 dark:text-stroke">
-                  {project.title}
-                </span>
-              </p>
-
-              {project.description}
-
-              <div className="flex flex-wrap justify-center gap-2">
-                {project.techology.map((tech, index) => (
-                  <p
-                    className={`${project.color} w-fit rounded-full px-5 py-1 dark:text-dark-text`}
-                    key={index}
-                  >
-                    {tech}
-                  </p>
-                ))}
+              <div className="md:px-10">
+                <button
+                  className={` ${project.color} relative w-full py-4 text-lg font-semibold tracking-wide hover:cursor-pointer hover:opacity-75 dark:text-dark-text md:rounded-md`}
+                >
+                  <span>View Project</span>
+                </button>
               </div>
             </div>
-
-            <div className="md:px-10">
-              <button
-                className={` ${project.color} relative w-full py-4 text-lg font-semibold tracking-wide hover:cursor-pointer hover:opacity-75 dark:text-dark-text md:rounded-md`}
-              >
-                <span>View Project</span>
-              </button>
-            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </section>
   );
 }
