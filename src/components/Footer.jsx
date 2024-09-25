@@ -34,7 +34,7 @@ function Footer() {
   ];
 
   return (
-    <footer className="mt-20 flex flex-col items-center justify-center gap-6 border-t border-extra bg-tertiary px-5 py-8 shadow-custom dark:border-none dark:bg-dark-tertiary dark:shadow-none lg:px-40">
+    <footer className="mt-20 flex w-full flex-col items-center justify-center gap-6 border-t border-extra bg-tertiary px-5 py-8 shadow-custom dark:border-none dark:bg-dark-tertiary dark:shadow-none lg:px-40">
       <div className="flex items-center gap-3">
         <BernardLogo width={"50"} height={"50"} />
         <p className="font-clash-display text-2xl font-semibold tracking-wide">
@@ -42,11 +42,11 @@ function Footer() {
         </p>
       </div>
 
-      <div className="flex gap-7">
+      <div className="flex flex-wrap items-center justify-center gap-2 lg:gap-4">
         {sections.map((section, index) => (
           <a
             href={`#${section}`}
-            className="dark:hover:text-dark-accent hover:cursor-pointer hover:text-accent"
+            className="hover:cursor-pointer hover:text-accent dark:hover:text-dark-accent"
             key={index}
           >
             {section.charAt(0).toUpperCase() + section.slice(1)}
@@ -54,7 +54,7 @@ function Footer() {
         ))}
       </div>
 
-      <div className="dark:text-dark-accent flex items-center gap-7 text-2xl text-accent">
+      <div className="flex items-center gap-7 text-2xl text-accent dark:text-dark-accent">
         {platforms.map((platform, index) => (
           <a
             className="hover:cursor-pointer hover:opacity-70"
@@ -70,12 +70,12 @@ function Footer() {
 
       <hr className="w-full border-[1.5px] border-accent dark:border-accent" />
 
-      <p className="whitespace-nowrap">
-        Copyright {currentYear} All Right Reserved |{" "}
-        <span className="dark:text-dark-accent font-medium text-accent">
+      <div className="flex flex-col items-center justify-center gap-1 text-center md:flex-row">
+        <p>Copyright {currentYear} All Right Reserved |</p>
+        <p className="font-medium text-accent dark:text-dark-accent">
           Bernardo L. Salva Jr
-        </span>{" "}
-      </p>
+        </p>
+      </div>
     </footer>
   );
 }

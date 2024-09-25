@@ -139,7 +139,7 @@ function Home() {
               words={[
                 "Front-end Developer",
                 "Web/Graphic Designer",
-                "Internet of Things Developer",
+                "IoT Developer",
               ]}
               loop={false}
               cursor
