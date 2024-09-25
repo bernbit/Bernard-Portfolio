@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import useGeneral from "./context/GeneralContext";
 
 // Pages
@@ -14,13 +13,14 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ThemeButton from "./components/ThemeButton";
 import BackTopButton from "./components/BackTopButton";
+import Resume from "./components/Resume";
 
 function App() {
-  const { showNav, mainContainerRef } = useGeneral();
+  const { showNav, mainContainerRef, showResume } = useGeneral();
 
   return (
     <div
-      className={`relative h-screen grid-rows-12 flex-col font-archivo text-dark-text dark:text-secondary`}
+      className={`relative h-screen grid-rows-12 flex-col font-archivo text-dark-text dark:text-secondary ${showResume ? "overflow-hidden" : ""}`}
       ref={mainContainerRef}
     >
       <BackTopButton />
@@ -39,6 +39,8 @@ function App() {
         <Contact />
         <Footer />
       </main>
+
+      <Resume />
     </div>
   );
 }

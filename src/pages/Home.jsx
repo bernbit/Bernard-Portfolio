@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import useGeneral from "../context/GeneralContext";
 import { Typewriter } from "react-simple-typewriter";
 
@@ -19,7 +19,7 @@ import ArduinoLogo from "../assets/svg/ArduinoLogo";
 import { useInView } from "react-intersection-observer";
 
 function Home() {
-  const { homeRef } = useGeneral();
+  const { homeRef, showResume, setShowResume } = useGeneral();
   const logos = [
     {
       component: ReactLogo,
@@ -38,7 +38,7 @@ function Home() {
       position: "-left-3 top-[45%] -translate-y-[45%]",
     },
     {
-      component: ArduinoLogo,
+      component: CSSLogo,
       position: "left-20 top-[93%] -translate-y-[93%]",
     },
     {
@@ -47,6 +47,12 @@ function Home() {
     },
   ];
 
+  const [width, setWidth] = useState();
+
+  const handleShowResume = () => {
+    setShowResume(true);
+  };
+
   const { ref: homeHeroRef, inView: homeHero } = useInView({
     threshold: 0.2,
   });
@@ -54,9 +60,28 @@ function Home() {
     threshold: 0.2,
   });
 
+  useEffect(() => {
+    // Window Resize Handler
+    const handleResize = () => {
+      const screenSize = window.innerWidth;
+      setWidth(screenSize);
+    };
+
+    // Add Event Listerners
+    window.addEventListener("resize", handleResize);
+
+    // Initial Window Resize
+    handleResize();
+
+    // Cleanup Function/Remove Event Listener
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <section
-      className="flex flex-col items-center gap-16 overflow-hidden bg-secondary px-5 pb-10 pt-32 dark:bg-dark-secondary lg:h-[101vh] lg:flex-row lg:px-40 lg:pt-28"
+      className="flex flex-col items-center gap-16 overflow-hidden bg-secondary px-5 pb-10 pt-32 dark:bg-dark-secondary md:px-10 md:pt-40 lg:h-[101vh] lg:flex-row lg:px-40 lg:pt-28"
       id="home"
       ref={homeRef}
     >
@@ -101,12 +126,15 @@ function Home() {
           <span className="font-fira-code">---- </span>
           Hello I'm
         </p>
-        <p className="font-clash-display text-3xl font-medium tracking-wider md:text-5xl">
-          <span className="text-accent underline">Bernardo</span> Salva Jr.
+        <p className="whitespace-nowrap font-clash-display text-3xl font-medium tracking-wider md:text-5xl">
+          <span className="text-accent underline dark:text-dark-accent">
+            Bernardo
+          </span>{" "}
+          Salva Jr.
         </p>
-        <p className="font-clash-display text-xl font-bold tracking-wider md:text-3xl">
+        <p className="whitespace-nowrap font-clash-display text-xl font-bold tracking-wider md:text-3xl">
           A{" "}
-          <span className="whitespace-nowrap">
+          <span className="">
             <Typewriter
               words={[
                 "Front-end Developer",
@@ -125,14 +153,16 @@ function Home() {
           </span>
         </p>
         <p className="text-align-last text-light text-justify">
-          A passionate Front-End Developer, Web/Graphic Designer, and IoT
-          Developer. I excel at creating dynamic, user-centric web experiences,
-          designing clean, responsive interfaces, and developing innovative IoT
-          solutions. Let's turn your vision into reality with cutting-edge
-          solutions.
+          A Front-End Developer, Web/Graphic Designer, and IoT Developer
+          passionate about creating engaging web experiences, designing clean
+          interfaces, and building smart IoT solutions. Let’s bring your ideas
+          to life.
         </p>
         <div className="flex gap-4 pt-5">
-          <button className="rounded-md bg-accent px-6 py-3 text-light-text">
+          <button
+            className="rounded-md bg-accent px-6 py-3 text-light-text hover:cursor-pointer hover:opacity-75 dark:bg-dark-accent"
+            onClick={handleShowResume}
+          >
             View Resume
           </button>
           <a href="#projects" className="flex items-center gap-2 px-6 py-3">

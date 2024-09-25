@@ -4,7 +4,7 @@ import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 function Loader() {
   return (
     <div className="flex h-screen flex-col items-center justify-center gap-2 bg-secondary dark:bg-dark-secondary">
-      <div className="loading flex items-center text-3xl text-accent">
+      <div className="loading dark:text-dark-accent flex items-center text-3xl text-accent">
         <MdArrowBackIos className="icon" />
         <MdArrowForwardIos className="icon" />
       </div>

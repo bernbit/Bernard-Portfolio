@@ -57,7 +57,7 @@ function Technology() {
       </p>
 
       <div
-        className={`transform rounded-md border border-extra bg-tertiary px-5 py-7 shadow-custom transition-transform duration-150 hover:scale-[1.03] dark:border-none dark:bg-dark-tertiary dark:shadow-none ${techBox ? "animate__animated animate__fadeInUp" : "opacity-0"}`}
+        className={`rounded-md border border-extra bg-tertiary px-5 py-7 shadow-custom dark:border-none dark:bg-dark-tertiary dark:shadow-none ${techBox ? "animate__animated animate__fadeInUp" : "opacity-0"}`}
         ref={techBoxRef}
       >
         <div className="grid grid-cols-4 gap-y-5 md:grid-cols-8">
@@ -66,7 +66,7 @@ function Technology() {
               className="flex flex-col items-center justify-center gap-2 text-center"
               key={index}
             >
-              <div className="smoother rounded-full border-gray-300 drop-shadow-lg hover:scale-[1.3] dark:drop-shadow-none">
+              <div className="smoother rounded-full border-gray-300 drop-shadow-lg hover:scale-[1.3] hover:transition-all hover:duration-300 dark:drop-shadow-none">
                 <technology.logo
                   width={60}
                   height={60}

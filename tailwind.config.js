@@ -11,17 +11,18 @@ export default {
         tertiary: "#F6F8F9",
         "dark-text": "#111519",
         extra: "#d1d5db",
+        accent: "#CC001F",
 
         // Dark Theme Color
         "dark-primary": "#111519",
         "dark-secondary": "#0C0E11",
         "dark-tertiary": "#1A2026",
         "light-text": "#ffff",
+        "dark-accent": "#e60000",
 
         // Supporting Colors
-        accent: "#CC001F",
         beewatch: "#FDE767",
-        enviromentrix: "#05BFDB",
+        envirometrix: "#05BFDB",
         "campus-echo": "#15F5BA",
         "variety-verse": "#F48668",
         ttt: "#92DCE5",
@@ -44,6 +45,9 @@ export default {
       },
       boxShadow: {
         custom: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;",
+      },
+      screens: {
+        lg: "1300px",
       },
     },
   },

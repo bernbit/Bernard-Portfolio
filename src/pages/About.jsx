@@ -13,7 +13,7 @@ function About() {
 
   return (
     <section
-      className="scroll-m-12 px-5 py-10 lg:px-40"
+      className="scroll-m-12 px-5 py-10 md:px-10 lg:px-40"
       id="about"
       ref={aboutRef}
     >
@@ -25,8 +25,8 @@ function About() {
           About Me
         </p>
         <p className="text-sm font-light md:text-base">
-          Here you will find more information about me, what I do, and my
-          current skills, mainly in programming, technology, and design.
+          Discover about what I do, and my current skills, mainly in
+          programming, technology, and design.
         </p>
       </div>
 

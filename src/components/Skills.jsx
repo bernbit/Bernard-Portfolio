@@ -9,20 +9,19 @@ function Skills() {
     {
       title: "Front-end Developement",
       description: (
-        <p>
-          Experienced in converting design concepts into high-quality,
-          functional websites through the use of{" "}
-          <span className="rounded-md bg-beewatch p-1 font-semibold uppercase dark:text-dark-text">
-            HTML, CSS, JavaScript, and React
+        <p className="leading-[1.8]">
+          Skilled in building user-friendly websites using{" "}
+          <span className="rounded-md bg-beewatch px-1 py-1.5 font-semibold uppercase dark:text-dark-text">
+            HTML, CSS, and JavaScript
           </span>
-          . Adept at utilizing{" "}
-          <span className="rounded-md bg-beewatch p-1 font-semibold uppercase dark:text-dark-text">
-            Tailwind CSS and Bootstrap
+          {""} along with{" "}
+          <span className="rounded-md bg-beewatch px-1 py-1.5 font-semibold uppercase dark:text-dark-text">
+            React, Tailwind CSS, and Bootstrap
           </span>{" "}
-          to develop responsive, intuitive interfaces that deliver a seamless
-          user experience across various devices. Dedicated to translating
-          creative visions into polished digital solutions, with a strong
-          emphasis on attention to detail, usability, and optimal performance.
+          to create responsive designs that perform well on any device.
+          Experienced in turning design prototypes into functional and engaging
+          websites, focusing on the details and ensuring everything runs
+          smoothly..
         </p>
       ),
       icon: FrontEndLogo,
@@ -31,44 +30,40 @@ function Skills() {
     {
       title: "Web/Graphic Design",
       description: (
-        <p>
-          Proficient in leveraging{" "}
-          <span className="rounded-md bg-enviromentrix p-1 font-semibold uppercase dark:text-dark-text">
+        <p className="leading-[1.8]">
+          Proficient in {""}
+          <span className="rounded-md bg-envirometrix px-1 py-1.5 font-semibold uppercase dark:text-dark-text">
             Figma
           </span>{" "}
-          for crafting intuitive web designs and{" "}
-          <span className="rounded-md bg-enviromentrix p-1 font-semibold uppercase dark:text-dark-text">
+          for designing clean, intuitive websites and{" "}
+          <span className="rounded-md bg-envirometrix px-1 py-1.5 font-semibold uppercase dark:text-dark-text">
             Photoshop
           </span>{" "}
-          for producing visually striking graphic designs. Expertise in creating
-          compelling visuals for both digital and print media, ensuring that
-          every design not only captivates but also functions seamlessly.
-          Skilled in transforming abstract concepts into engaging, aesthetically
-          pleasing designs that resonate with the target audience and
-          effectively communicate the intended message.
+          for creating standout graphics. Experienced in making visuals for both
+          digital and print that look great and work well. Focused on turning
+          ideas into designs that connect with the audience and communicate the
+          right message.
         </p>
       ),
       icon: Web_GraphicLogo,
-      color: "bg-enviromentrix",
+      color: "bg-envirometrix",
     },
     {
       title: "IoT Development",
       description: (
-        <p>
+        <p className="leading-[1.8]">
           Experienced in using{" "}
-          <span className="rounded-md bg-campus-echo p-1 font-semibold uppercase dark:text-dark-text">
+          <span className="rounded-md bg-campus-echo px-1 py-1.5 font-semibold uppercase dark:text-dark-text">
             ESP32/ESP8266
           </span>{" "}
           and{" "}
-          <span className="rounded-md bg-campus-echo p-1 font-semibold uppercase dark:text-dark-text">
+          <span className="rounded-md bg-campus-echo px-1 py-1.5 font-semibold uppercase dark:text-dark-text">
             Firebase
           </span>{" "}
-          to develop smart systems that connect devices and sensors for
-          real-world applications. Skilled in merging hardware with software to
-          build efficient, scalable IoT solutions that address specific
-          challenges. Focused on creating connected systems that enhance
-          automation, improve efficiency, and bring the Internet of Things into
-          practical use.
+          to build smart systems that connect devices and sensors. Skilled in
+          combining hardware and software to create efficient, scalable IoT
+          solutions. Focused on developing connected systems that enhance
+          automation and improve efficiency."
         </p>
       ),
       icon: IoTLogo,
@@ -101,13 +96,13 @@ function Skills() {
             <div
               key={index}
               ref={skillBoxRef}
-              className={`transform rounded-md border border-extra bg-tertiary px-5 py-7 shadow-custom transition-transform duration-150 hover:scale-[1.03] dark:border-none dark:bg-dark-tertiary dark:shadow-none ${skillBox ? "animate__animated animate__fadeInUp" : "opacity-0"}`}
+              className={`rounded-md border border-extra bg-tertiary px-5 py-7 shadow-custom dark:border-none dark:bg-dark-tertiary dark:shadow-none ${skillBox ? "animate__animated animate__fadeInUp" : "opacity-0"}`}
             >
-              <div className="flex items-center gap-5">
+              <div className="flex items-center gap-3 md:gap-5">
                 <skill.icon width={55} height={55} />
                 <p className="relative font-clash-display text-[1.05rem] font-semibold uppercase tracking-widest md:text-xl">
                   <span
-                    className={`absolute -left-1.5 top-3.5 z-0 h-[10px] w-[104%] ${skill.color}`}
+                    className={`absolute -left-1.5 top-3.5 z-0 h-[10px] w-[104%] ${skill.color} bg-opacity-85 dark:bg-opacity-80`}
                   ></span>
                   <span className="relative z-10 whitespace-nowrap font-semibold text-dark-text dark:font-bold dark:text-gray-700 dark:text-stroke">
                     {skill.title}
@@ -115,7 +110,7 @@ function Skills() {
                 </p>
               </div>
 
-              <div className="flex gap-5 pt-5">
+              <div className="flex gap-0 pt-5 md:gap-5">
                 <div className="flex flex-col items-center px-2 font-fira-code text-sm text-gray-400">
                   <p className="">{"<h3>"}</p>
                   <p className="dark-text h-full border-l-2 border-gray-400"></p>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useGeneral from "../context/GeneralContext";
 import { MdEmail, MdPhone, MdLocationOn, MdWarning } from "react-icons/md";
 import {
@@ -56,6 +56,7 @@ function Contact() {
     phoneNumber: "",
     message: "",
   });
+  const [inputting, setInputting] = useState(false);
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
@@ -63,6 +64,10 @@ function Contact() {
       ...formData,
       [e.target.name]: e.target.value,
     });
+
+    if (error) {
+      setError("");
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -77,13 +82,14 @@ function Contact() {
 
     try {
       setError("");
+      setInputting(true);
       const sendEmail = await window.Email.send({
         Host: "smtp.elasticemail.com",
         Username: "salvabernardojr23@gmail.com",
         Password: "CA79F11AD2A118396C3F55B756267BB57AD8",
         To: "salvabernardojr23@gmail.com",
         From: "salvabernardojr23@gmail.com",
-        Subject: `New Message from Your Portfolio: "${formData.name}"`,
+        Subject: `New Message from ${formData.name} via Your Portfolio"`,
         Body: `
         <html>
         <body style="font-family: Verdana, sans-serif;">
@@ -108,7 +114,7 @@ function Contact() {
       if (sendEmail === "OK") {
         const swalResult = await Swal.fire({
           title: "Message sent",
-          text: "Your message has been sent successfully. Thank you! We’ll be in touch soon.",
+          text: "Your message has been sent successfully.",
           icon: "success",
           confirmButtonText: "OK",
           confirmButtonColor: "#CC001F",
@@ -128,6 +134,8 @@ function Contact() {
     } catch (error) {
       console.error("Error sending email: " + error);
     }
+
+    setInputting(false);
   };
 
   const { ref: contactTitleRef, inView: contactTitle } = useInView({
@@ -140,7 +148,7 @@ function Contact() {
 
   return (
     <section
-      className="scroll-m-12 px-5 py-10 lg:px-40"
+      className="scroll-m-12 px-5 py-10 md:px-10 lg:px-40"
       id="contact"
       ref={contactRef}
     >
@@ -152,8 +160,8 @@ function Contact() {
           Contact Me
         </p>
         <p className="text-sm font-light md:text-base">
-          See what clients say about my work, highlighting my focus on clean
-          design and seamless user experiences.
+          Have questions or project inquiries? I'd love to hear from you—let's
+          connect!
         </p>
       </div>
 
@@ -163,13 +171,14 @@ function Contact() {
       >
         <div className="flex basis-4/12 flex-col gap-4">
           <p className="text-2xl font-semibold">
-            Let's talk on something <span className="text-accent">great </span>
+            Let's talk on something{" "}
+            <span className="text-accent dark:text-dark-accent">great </span>
             together
           </p>
           <div className="flex grow flex-col justify-center gap-6">
             {contactInfo.map((contact, index) => (
               <div className="flex items-center gap-4" key={index}>
-                <contact.icon className="text-2xl text-accent" />
+                <contact.icon className="text-2xl text-accent dark:text-dark-accent" />
                 <p className="">{contact.title}</p>
               </div>
             ))}
@@ -183,7 +192,7 @@ function Contact() {
                 name={platform.title}
                 key={index}
               >
-                <platform.icon className="bg-clip-content text-2xl text-accent" />
+                <platform.icon className="bg-clip-content text-2xl text-accent dark:text-dark-accent" />
               </a>
             ))}
           </div>
@@ -191,7 +200,7 @@ function Contact() {
 
         <form
           action=""
-          className="flex basis-8/12 flex-col gap-2 rounded-md bg-accent px-5 py-5"
+          className="flex basis-8/12 flex-col gap-2 rounded-md bg-accent px-5 py-5 dark:bg-dark-accent"
           onSubmit={handleSubmit}
         >
           <div className="text-light-text">
@@ -200,7 +209,9 @@ function Contact() {
           </div>
 
           {error && (
-            <div className="flex items-center gap-2 rounded-md bg-dark-primary p-2 text-light-text dark:bg-primary dark:text-accent">
+            <div
+              className={`flex items-center gap-2 rounded-md bg-dark-primary p-2 text-light-text dark:bg-primary dark:text-accent ${error && "animate__animated animate__fadeIn"}`}
+            >
               <MdWarning className="text-2xl" />
               <p>{error}</p>
             </div>
@@ -244,8 +255,9 @@ function Contact() {
             required
           ></textarea>
           <button
-            className="rounded-md bg-primary p-2 text-lg font-semibold text-accent hover:cursor-pointer hover:opacity-90 dark:bg-dark-primary"
+            className="rounded-md bg-primary p-2 text-lg font-semibold text-accent hover:cursor-pointer hover:opacity-90 dark:bg-dark-primary dark:text-dark-accent"
             type="submit"
+            disabled={inputting}
           >
             Send
           </button>

@@ -46,7 +46,7 @@ function Footer() {
         {sections.map((section, index) => (
           <a
             href={`#${section}`}
-            className="hover:cursor-pointer hover:text-accent"
+            className="dark:hover:text-dark-accent hover:cursor-pointer hover:text-accent"
             key={index}
           >
             {section.charAt(0).toUpperCase() + section.slice(1)}
@@ -54,7 +54,7 @@ function Footer() {
         ))}
       </div>
 
-      <div className="flex items-center gap-7 text-2xl text-accent">
+      <div className="dark:text-dark-accent flex items-center gap-7 text-2xl text-accent">
         {platforms.map((platform, index) => (
           <a
             className="hover:cursor-pointer hover:opacity-70"
@@ -68,11 +68,13 @@ function Footer() {
         ))}
       </div>
 
-      <hr className="w-full border-[1.5px] border-accent" />
+      <hr className="w-full border-[1.5px] border-accent dark:border-accent" />
 
       <p className="whitespace-nowrap">
         Copyright {currentYear} All Right Reserved |{" "}
-        <span className="font-medium text-accent">Bernardo L. Salva Jr</span>{" "}
+        <span className="dark:text-dark-accent font-medium text-accent">
+          Bernardo L. Salva Jr
+        </span>{" "}
       </p>
     </footer>
   );

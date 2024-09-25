@@ -2,7 +2,8 @@ import React from "react";
 import useGeneral from "../context/GeneralContext";
 import Quote from "../assets/svg/Quote";
 import Rate from "../assets/svg/Rate";
-import Sample from "../assets/img/Sample.jpg";
+import Sample from "../assets/img/Unknown.png";
+import Arc from "../assets/img/Clients/Arc.png";
 
 import { useInView } from "react-intersection-observer";
 
@@ -14,17 +15,19 @@ function Testimonials() {
       name: "Arc Datario",
       project: "BeeWatch Client",
       description:
-        "Working with Pedro was a fantastic experience! He brought our vision to life with his keen eye for design and exceptional front-end development skills. The website he built is not only visually stunning but also incredibly responsive across all devices. Pedro's attention to detail and ability to seamlessly integrate our feedback made the process smooth and efficient.Highly recommend him for any web development project!",
+        "Working with Bernardo on our BeeWatch IoT project has been a great experience! He created a system that monitors the temperature and humidity of our beehives in real-time. Bernardo paid great attention to detail, making sure that we receive automatic alerts for any critical changes, so we can respond quickly. The data insights and user-friendly interface have really improved how we manage our hives. Highly recommend him for any IoT or web development work!",
       img: Sample,
-      color: "fill-beewatch",
+      fill: "fill-beewatch",
+      "bg-color": "bg-beewatch",
     },
     {
       name: "Joseph Ortega",
-      project: "Enviromentrix Client",
+      project: "Envirometrix Client",
       description:
-        "Working with Pedro was a fantastic experience! He brought our vision to life with his keen eye for design and exceptional front-end development skills. The website he built is not only visually stunning but also incredibly responsive across all devices. Pedro's attention to detail and ability to seamlessly integrate our feedback made the process smooth and efficient.Highly recommend him for any web development project!",
+        "Envirometrix has completely changed the way we approach gardening! Bernardo delivered an outstanding smart monitoring system that tracks everything from soil moisture to humidity in real-time. The push notifications are a lifesaver, ensuring we never miss a critical change. It's not just about data; it’s about peace of mind knowing our plants are in good hands. I can't thank Bernardo enough for his expertise and dedication—he truly understands the needs of his clients!",
       img: Sample,
-      color: "fill-enviromentrix",
+      fill: "fill-envirometrix",
+      "bg-color": "bg-envirometrix",
     },
   ];
 
@@ -34,7 +37,7 @@ function Testimonials() {
 
   return (
     <section
-      className="scroll-m-12 overflow-hidden px-5 py-10 lg:px-40"
+      className="scroll-m-12 overflow-hidden px-5 py-10 md:px-10 lg:px-40"
       id="testimonials"
       ref={testimonialRef}
     >
@@ -46,8 +49,8 @@ function Testimonials() {
           Testimonials
         </p>
         <p className="text-sm font-light md:text-base">
-          See what clients say about my work, highlighting my focus on clean
-          design and seamless user experiences.
+          See how my clients describe their experiences and the impact of my
+          work.
         </p>
       </div>
 
@@ -70,14 +73,16 @@ function Testimonials() {
               ref={testimonialBoxRef}
             >
               {/* Avatar */}
-              <div className="absolute -top-10 left-1/2 h-[80px] w-[80px] -translate-x-1/2 transform overflow-hidden rounded-full border border-dark-primary">
+              <div
+                className={`absolute -top-10 left-1/2 h-[80px] w-[80px] -translate-x-1/2 transform overflow-hidden rounded-full ${testimony["bg-color"]}`}
+              >
                 <img src={testimony.img} alt="" />
               </div>
 
-              <div className="px-8 py-8">
+              <div className="flex h-full flex-col px-8 py-8">
                 {/* Header */}
                 <div className="grid grid-cols-3">
-                  <Quote width={75} height={75} color={testimony.color} />
+                  <Quote width={75} height={75} color={testimony.fill} />
                   <div className="flex flex-col items-center justify-center">
                     <p className="mt-4 whitespace-nowrap text-2xl font-medium">
                       {testimony.name}
@@ -90,9 +95,11 @@ function Testimonials() {
                 </div>
 
                 {/* Body */}
-                <p className="text-align-last-center py-4 text-justify">
-                  {testimony.description}
-                </p>
+                <div className="grid grow place-items-center">
+                  <p className="text-align-last-center py-4 text-justify">
+                    {testimony.description}
+                  </p>
+                </div>
 
                 <div className="flex items-center justify-center">
                   <Rate width={"150"} height={"25"} color={testimony.color} />

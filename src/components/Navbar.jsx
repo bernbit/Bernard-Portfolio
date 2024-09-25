@@ -14,7 +14,7 @@ function Navbar() {
 
   return (
     <nav
-      className={`fixed left-1/2 z-40 row-span-1 flex -translate-x-1/2 transform items-center px-5 py-2 transition-all duration-200 ease-out lg:px-40 ${isScrolled || showNav ? "bg-secondary dark:bg-dark-secondary" : "bg-primary dark:bg-dark-primary"} ${isScrolled ? "top-0 w-full rounded-none" : "top-6 w-5/6 rounded-full"} ${!isScrolled || showNav ? "shadow-custom dark:shadow-none" : "shadow-none"} ${!isScrolled && showNav ? "border border-gray-600" : "border-none"}`}
+      className={`fixed left-1/2 z-40 row-span-1 flex min-w-fit -translate-x-1/2 transform items-center gap-x-10 px-5 py-2 transition-all duration-200 ease-out ${isScrolled || showNav ? "bg-secondary dark:bg-dark-secondary" : "bg-primary dark:bg-dark-primary"} ${isScrolled ? "top-0 w-full rounded-none md:px-10 lg:px-40" : "top-6 w-4/6 rounded-full lg:px-20"} ${!isScrolled || showNav ? "shadow-custom dark:shadow-none" : "shadow-none"} ${!isScrolled && showNav ? "border border-gray-600" : "border-none"}`}
     >
       <div className="flex grow items-center gap-3">
         <a href="/">
@@ -24,10 +24,10 @@ function Navbar() {
           <a href="#home">Bernard</a>
         </h1>
       </div>
-      <div className="hidden grow justify-end gap-8 text-lg font-medium md:flex">
+      <div className="hidden grow justify-end gap-5 text-lg font-medium md:flex">
         {navOptions.map((option, index) => (
           <a
-            className={`${activeNav === index ? "text-accent" : ""} py-2 hover:cursor-pointer hover:text-accent hover:opacity-75`}
+            className={`${activeNav === index ? "text-accent dark:text-dark-accent" : ""} py-2 hover:cursor-pointer hover:text-accent hover:opacity-75 dark:hover:text-dark-accent`}
             key={index}
             onClick={() => handleActiveNav(index)}
             href={`#${option.label.toLowerCase()}`}

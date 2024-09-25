@@ -34,6 +34,7 @@ export function GeneralProvider({ children }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [showResume, setShowResume] = useState(false);
 
   //*   Funtions
   const handleActiveNav = (index) => {
@@ -147,6 +148,8 @@ export function GeneralProvider({ children }) {
     darkMode,
     setDarkMode,
     handleDarkMode,
+    showResume,
+    setShowResume,
   };
 
   return (

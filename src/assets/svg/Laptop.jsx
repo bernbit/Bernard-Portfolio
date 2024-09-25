@@ -1,6 +1,6 @@
 import React from "react";
 
-function Laptop({ width = 566, height = 354, img }) {
+function Laptop({ width = 500, height = 354, img }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
