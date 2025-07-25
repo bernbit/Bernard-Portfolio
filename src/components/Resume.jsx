@@ -102,6 +102,21 @@ function Resume() {
     };
   }, []);
 
+  useEffect(() => {
+    const originalStyle = document.body.style.overflow;
+
+    if (showResume) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = originalStyle;
+    }
+
+    // Clean up when the component unmounts or showResume turns false
+    return () => {
+      document.body.style.overflow = originalStyle;
+    };
+  }, [showResume]);
+
   return (
     <div
       className={`fixed inset-0 z-50 h-screen w-screen flex-col gap-3 overflow-y-auto bg-stone-900 bg-opacity-75 text-light-text backdrop-blur-sm transition-all ${showResume ? "animate__animated animate__fadeInUp animate__fast flex" : "hidden"}`}

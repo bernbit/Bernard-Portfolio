@@ -15,33 +15,40 @@ import CSSLogo from "../assets/svg/CSSLogo";
 import JSLogo from "../assets/svg/JSLogo";
 import ESPLogo from "../assets/svg/ESPLogo";
 import ArduinoLogo from "../assets/svg/ArduinoLogo";
-
+import TSLogo from "../assets/svg/TSLogo";
+import NextJSLogo from "../assets/svg/NextJSLogo";
 import { useInView } from "react-intersection-observer";
 
 function Home() {
   const { homeRef, showResume, setShowResume } = useGeneral();
   const logos = [
     {
+      name: "React",
       component: ReactLogo,
       position: "left-20 top-1 -translate-y-1",
     },
     {
+      name: "Tailwind CSS",
       component: TailwindLogo,
       position: "right-10 top-1 -translate-y-1",
     },
     {
-      component: FigmaLogo,
+      name: "Typescript",
+      component: TSLogo,
       position: "-right-3 top-[45%] -translate-y-[45%]",
     },
     {
-      component: PhotoshopLogo,
+      name: "NextJS",
+      component: NextJSLogo,
       position: "-left-3 top-[45%] -translate-y-[45%]",
     },
     {
+      name: "CSS",
       component: CSSLogo,
       position: "left-20 top-[93%] -translate-y-[93%]",
     },
     {
+      name: "Javascript",
       component: JSLogo,
       position: "right-10 top-[93%] -translate-y-[93%]",
     },
@@ -101,6 +108,7 @@ function Home() {
           <div
             key={index}
             className={`absolute ${logo.position} animate-float drop-shadow-lg`}
+            title={logo.name}
           >
             <logo.component
               width={55}
@@ -138,8 +146,10 @@ function Home() {
             <Typewriter
               words={[
                 "Front-end Developer",
+                "Application Developer",
                 "Web/Graphic Designer",
-                "IoT Developer",
+
+                // "IoT Developer",
               ]}
               loop={false}
               cursor
@@ -153,10 +163,10 @@ function Home() {
           </span>
         </p>
         <p className="text-align-last text-light text-justify">
-          A Front-End Developer, Web/Graphic Designer, and IoT Developer
+          A Front-End Developer, App Developer, and Web/Graphic Designer
           passionate about creating engaging web experiences, designing clean
-          interfaces, and building smart IoT solutions. Let’s bring your ideas
-          to life.
+          and intuitive interfaces, and building functional cross-platform
+          applications. Let's bring your ideas to life.
         </p>
         <div className="flex gap-4 pt-5">
           <button

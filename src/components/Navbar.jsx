@@ -21,19 +21,18 @@ function Navbar() {
           <BernardLogo width={50} height={50} />
         </a>
         <h1 className="font-clash-display text-2xl font-semibold tracking-wide">
-          <a href="#home">Bernard</a>
+          <a href="/">Bernard</a>
         </h1>
       </div>
       <div className="hidden grow justify-end gap-5 text-lg font-medium md:flex">
         {navOptions.map((option, index) => (
-          <a
-            className={`${activeNav === index ? "text-accent dark:text-dark-accent" : ""} py-2 hover:cursor-pointer hover:text-accent hover:opacity-75 dark:hover:text-dark-accent`}
+          <button
             key={index}
+            className={`${activeNav === index ? "text-accent dark:text-dark-accent" : ""} border-none bg-transparent py-2 hover:cursor-pointer hover:text-accent hover:opacity-75 dark:hover:text-dark-accent`}
             onClick={() => handleActiveNav(index)}
-            href={`#${option.label.toLowerCase()}`}
           >
             {option.label}
-          </a>
+          </button>
         ))}
       </div>
 

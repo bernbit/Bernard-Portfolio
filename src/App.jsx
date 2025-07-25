@@ -20,7 +20,7 @@ function App() {
 
   return (
     <div
-      className={`relative h-screen grid-rows-12 flex-col font-archivo text-dark-text dark:text-secondary ${showResume ? "overflow-hidden" : ""}`}
+      className={`relative h-screen grid-rows-12 flex-col font-archivo text-dark-text dark:text-secondary`}
       ref={mainContainerRef}
     >
       <BackTopButton />

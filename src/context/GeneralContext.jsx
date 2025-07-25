@@ -40,7 +40,22 @@ export function GeneralProvider({ children }) {
   const handleActiveNav = (index) => {
     setActiveNav(index);
     setShowNav(false);
+
+    const sectionRefs = [
+      homeRef,
+      aboutRef,
+      projectRef,
+      testimonialRef,
+      contactRef,
+    ];
+
+    const targetRef = sectionRefs[index];
+
+    if (targetRef.current) {
+      targetRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
+
   const handleShowNav = () => {
     setShowNav(!showNav);
   };

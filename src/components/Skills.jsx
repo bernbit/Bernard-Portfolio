@@ -2,6 +2,8 @@ import React from "react";
 import FrontEndLogo from "../assets/svg/FrontEndLogo";
 import Web_GraphicLogo from "../assets/svg/Web_GraphicLogo";
 import IoTLogo from "../assets/svg/IoTLogo";
+import WebDevLogo from "../assets/svg/WebDevLogo";
+import AppDevLogo from "../assets/svg/AppDevLogo";
 import { useInView } from "react-intersection-observer";
 
 function Skills() {
@@ -24,8 +26,36 @@ function Skills() {
           smoothly..
         </p>
       ),
-      icon: FrontEndLogo,
+      icon: WebDevLogo,
       color: "bg-beewatch",
+    },
+    {
+      title: "Application Development",
+      description: (
+        <p className="leading-[1.8]">
+          Experienced in developing cross-platform mobile applications using{" "}
+          {""}
+          <span className="rounded-md bg-balingtech px-1 py-1.5 font-semibold uppercase dark:text-dark-text">
+            React Native
+          </span>
+          {"  "}
+          with a strong focus on intuitive user interfaces and seamless user
+          experiences. Skilled in leveraging {""}
+          <span className="rounded-md bg-balingtech px-1 py-1.5 font-semibold uppercase dark:text-dark-text">
+            Expo
+          </span>
+          {"  "}
+          for efficient development and {""}
+          <span className="rounded-md bg-balingtech px-1 py-1.5 font-semibold uppercase dark:text-dark-text">
+            Firebase
+          </span>
+          {"  "}
+          for real-time functionality. Capable of building responsive,
+          high-performance apps that feel native on both Android and iOS.
+        </p>
+      ),
+      icon: AppDevLogo,
+      color: "bg-balingtech",
     },
     {
       title: "Web/Graphic Design",
@@ -48,27 +78,27 @@ function Skills() {
       icon: Web_GraphicLogo,
       color: "bg-envirometrix",
     },
-    {
-      title: "IoT Development",
-      description: (
-        <p className="leading-[1.8]">
-          Experienced in using{" "}
-          <span className="rounded-md bg-campus-echo px-1 py-1.5 font-semibold uppercase dark:text-dark-text">
-            ESP32/ESP8266
-          </span>{" "}
-          and{" "}
-          <span className="rounded-md bg-campus-echo px-1 py-1.5 font-semibold uppercase dark:text-dark-text">
-            Firebase
-          </span>{" "}
-          to build smart systems that connect devices and sensors. Skilled in
-          combining hardware and software to create efficient, scalable IoT
-          solutions. Focused on developing connected systems that enhance
-          automation and improve efficiency."
-        </p>
-      ),
-      icon: IoTLogo,
-      color: "bg-campus-echo",
-    },
+    // {
+    //   title: "IoT Development",
+    //   description: (
+    //     <p className="leading-[1.8]">
+    //       Experienced in using{" "}
+    //       <span className="rounded-md bg-campus-echo px-1 py-1.5 font-semibold uppercase dark:text-dark-text">
+    //         ESP32/ESP8266
+    //       </span>{" "}
+    //       and{" "}
+    //       <span className="rounded-md bg-campus-echo px-1 py-1.5 font-semibold uppercase dark:text-dark-text">
+    //         Firebase
+    //       </span>{" "}
+    //       to build smart systems that connect devices and sensors. Skilled in
+    //       combining hardware and software to create efficient, scalable IoT
+    //       solutions. Focused on developing connected systems that enhance
+    //       automation and improve efficiency."
+    //     </p>
+    //   ),
+    //   icon: IoTLogo,
+    //   color: "bg-campus-echo",
+    // },
   ];
 
   const { ref: skillTitleRef, inView: skillTitle } = useInView({

@@ -6,8 +6,11 @@ import {
   FaFacebook,
   FaInstagram,
 } from "react-icons/fa6";
+import useGeneral from "../context/GeneralContext";
 
 function Footer() {
+  const { handleActiveNav } = useGeneral();
+
   const currentYear = new Date().getFullYear();
   const sections = ["home", "about", "projects", "testimonials", "contact"];
   const platforms = [
@@ -44,13 +47,13 @@ function Footer() {
 
       <div className="flex flex-wrap items-center justify-center gap-2 lg:gap-4">
         {sections.map((section, index) => (
-          <a
-            href={`#${section}`}
-            className="hover:cursor-pointer hover:text-accent dark:hover:text-dark-accent"
+          <button
             key={index}
+            className="hover:cursor-pointer hover:text-accent dark:hover:text-dark-accent"
+            onClick={() => handleActiveNav(index)}
           >
             {section.charAt(0).toUpperCase() + section.slice(1)}
-          </a>
+          </button>
         ))}
       </div>
 

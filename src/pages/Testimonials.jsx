@@ -12,19 +12,55 @@ function Testimonials() {
 
   const testimonies = [
     {
-      name: "Arc Datario",
+      name: "Jetlorel",
+      project: "GKeep Client",
+      description:
+        "The GKeep app Bernardo built for us was exactly what we needed — straightforward, effective, and easy to use. It helped us track goats in real time, and he was always responsive to feedback. It felt like working with a partner, not just a developer.",
+      img: Sample,
+      fill: "fill-gkeep",
+      "bg-color": "bg-gkeep",
+    },
+    {
+      name: "Julius ",
+      project: "Pinyaxtract Client",
+      description:
+        "Working with Bernardo was a great experience. He developed a clean, reliable app that was easy to use and aligned with what we had envisioned. He treats your project with care, always open to suggestions, and brings thoughtful ideas to the table.",
+      img: Sample,
+      fill: "fill-pinyaxtact",
+      "bg-color": "bg-pinyaxtact",
+    },
+    {
+      name: "Lawrence ",
+      project: "BalingTech Client",
+      description:
+        "Bernardo built the Balingtech app exactly how we needed it. It lets us set timers for each step in the cassava chip process — like slicing, drying, and more — and it even records all the operations. There's also a start/stop button and flavor selection, which made things more flexible. Everything worked well, and he was easy to work with the whole time.",
+      img: Sample,
+      fill: "fill-balingtech",
+      "bg-color": "bg-balingtech",
+    },
+    {
+      name: "Myca",
+      project: "BananaCare Client",
+      description:
+        "We worked with Bernardo to build BananaCare, a web app that detects banana diseases through image analysis. He made the process simple for users — just capture an image and get instant results. The UI was clean, and the detection was surprisingly accurate. His technical skills and user-focused design really stood out.",
+      img: Sample,
+      fill: "fill-bananacare",
+      "bg-color": "bg-bananacare",
+    },
+    {
+      name: "Arc",
       project: "BeeWatch Client",
       description:
-        "Working with Bernardo on our BeeWatch IoT project has been a great experience! He created a system that monitors the temperature and humidity of our beehives in real-time. Bernardo paid great attention to detail, making sure that we receive automatic alerts for any critical changes, so we can respond quickly. The data insights and user-friendly interface have really improved how we manage our hives. Highly recommend him for any IoT or web development work!",
+        "Bernardo was instrumental in bringing our BeeWatch concept to life. He developed a real-time monitoring system for temperature and humidity with built-in alerts that help us respond quickly to any changes. His attention to detail and clear communication made the whole process smooth from start to finish.",
       img: Sample,
       fill: "fill-beewatch",
       "bg-color": "bg-beewatch",
     },
     {
-      name: "Joseph Ortega",
+      name: "Joseph",
       project: "Envirometrix Client",
       description:
-        "Envirometrix has completely changed the way we approach gardening! Bernardo delivered an outstanding smart monitoring system that tracks everything from soil moisture to humidity in real-time. The push notifications are a lifesaver, ensuring we never miss a critical change. It's not just about data; it’s about peace of mind knowing our plants are in good hands. I can't thank Bernardo enough for his expertise and dedication—he truly understands the needs of his clients!",
+        "We needed a smart solution for tracking environmental conditions in a garden setting, and Bernardo delivered exactly that. The system he built monitors moisture, pH, humidity, and more — all with real-time notifications. He really listened to our goals and built something that worked beyond expectations.",
       img: Sample,
       fill: "fill-envirometrix",
       "bg-color": "bg-envirometrix",
@@ -54,7 +90,7 @@ function Testimonials() {
         </p>
       </div>
 
-      <div className="mt-7 flex flex-col gap-20 md:flex-row md:gap-7">
+      <div className="mt-7 grid gap-20 md:grid-cols-2 md:gap-x-7 md:gap-y-20">
         {testimonies.map((testimony, index) => {
           const { ref: testimonialBoxRef, inView: testimonialBox } = useInView({
             threshold: 0,

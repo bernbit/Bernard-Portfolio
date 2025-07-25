@@ -1,110 +1,87 @@
 import React, { useState, useEffect } from "react";
+//Context
 import useGeneral from "../context/GeneralContext";
-import { MdPhoneIphone, MdComputer } from "react-icons/md";
-
+//External Libraries
+import { useInView } from "react-intersection-observer";
+//Constants
+import { projects } from "../constant/projects";
+//Icons
+import {
+  MdPhoneIphone,
+  MdComputer,
+  MdArrowForward,
+  MdArrowBack,
+  MdFullscreen,
+} from "react-icons/md";
+//Assests
 import Laptop from "../assets/svg/Laptop";
 import Phone from "../assets/svg/Phone";
-//BeeWatch
-import BeeWatch_SS1 from "../assets/img/BeeWatch/BeeWatch_SS1.jpg";
-import BeeWatchPhone_SS1 from "../assets/img/BeeWatch/BeeWatchPhone_SS1.jpg";
-import BeeWatchPhone_SS3 from "../assets/img/BeeWatch/BeeWatchPhone_SS3.jpg";
-//Enviromentrix
-import Enviromentrix_SS1 from "../assets/img/Enviromentrix/Enviromentrix_SS1.jpg";
-import EnviromentrixPhone_SS1 from "../assets/img/Enviromentrix/EnviromentrixPhone_SS1.jpg";
-import EnviromentrixPhone_SS2 from "../assets/img/Enviromentrix/EnviromentrixPhone_SS2.jpg";
-//Campus Echo
-import CampusEcho_SS1 from "../assets/img/CampusEcho/CampusEcho_SS1.jpg";
-import CampusEchoPhone_SS1 from "../assets/img/CampusEcho/CampusEchoPhone_SS1.jpg";
-import CampusEchoPhone_SS2 from "../assets/img/CampusEcho/CampusEchoPhone_SS2.jpg";
-//Variety Verse
-import VarietyVerse_SS1 from "../assets/img/VarietyVerse/VarietyVerse_SS1.jpg";
-import VarietyVersePhone_SS1 from "../assets/img/VarietyVerse/VarietyVersePhone_SS1.jpg";
-import VarietyVersePhone_SS2 from "../assets/img/VarietyVerse/VarietyVersePhone_SS2.jpg";
-// Tic Tac Toe
-import TTT_SS1 from "../assets/img/TTT/TTT_SS1.jpg";
-import TTTPhone_SS1 from "../assets/img/TTT/TTTPhone_SS1.jpg";
-import TTTPhone_SS2 from "../assets/img/TTT/TTTPhone_SS2.jpg";
-
-import { useInView } from "react-intersection-observer";
+//Custom Components
+import Modal from "../components/Modal";
 
 function Projects() {
-  const projects = [
-    {
-      title: "BeeWatch",
-      description:
-        "Beewatch is an IoT project that monitors the real-time temperature and humidity of beehives using a DHT-22 sensor. It automates actions based on these readings and includes data collection, graphing capabilities, user management features, push notifications, and SMS alerts for specific temperature and humidity thresholds. It is designed as a Progressive Web App (PWA) for easy access and usability.",
+  //* useRef
+  const { projectRef } = useGeneral();
 
-      techology: ["React", "Tailwind", "Firebase", "Chart.js", "ESP32"],
-      color: "bg-beewatch",
-      textColor: "text-beewatch",
-      desktopImg: BeeWatch_SS1,
-      phoneImg: BeeWatchPhone_SS1,
-      phoneImg2: BeeWatchPhone_SS3,
-      link: "https://beewatch-demo.web.app/",
-    },
-    {
-      title: "Envirometrix",
-      description:
-        "Envirometrix is a smart plant monitoring system designed for multi-micro gardening using the ESP32 microcontroller. It tracks key environmental factors like soil moisture, temperature, pH levels, and humidity in real-time to optimize plant growth. The system sends push notifications to users when sensor data exceeds specific thresholds, ensuring timely intervention. Envirometrix also features a Progressive Web App (PWA) design, making it easily installable for quick access and seamless monitoring from any device.",
-
-      techology: ["React", "CSS", "Firebase", "ESP32"],
-      color: "bg-envirometrix",
-      textColor: "text-envirometrix",
-      desktopImg: Enviromentrix_SS1,
-      phoneImg: EnviromentrixPhone_SS2,
-      phoneImg2: EnviromentrixPhone_SS1,
-      link: "https://envirometrix-demo.web.app/",
-    },
-    {
-      title: "Campus Echo",
-      description:
-        "Campus Echo is a platform where users can freely share their thoughts, rants, and complaints in real-time. It utilizes Firebase Firestore to store posts and Firebase Authentication for authetication, ensuring a seamless experience for users. Built with React for a dynamic frontend and styled with Tailwind CSS, Campus Echo offers a modern and responsive interface. The project promotes an open space for user expression, enabling easy interaction and community engagement.",
-
-      techology: ["React", "Tailwind", "Firebase"],
-      color: "bg-campus-echo",
-      textColor: "text-campus-echo",
-      desktopImg: CampusEcho_SS1,
-      phoneImg: CampusEchoPhone_SS1,
-      phoneImg2: CampusEchoPhone_SS2,
-      link: "https://campus-echo.web.app/",
-    },
-    {
-      title: "Variety Verse",
-      description:
-        "Variety Verse is a personal project that provides users with random quotes, memes, riddles, and jokes. The content is fetched from different APIs, offering fresh and entertaining options. The app also includes a feature to share the generated content directly on Twitter, making it easy to enjoy and share fun moments with others. It provides an engaging experience through a simple and intuitive interface.",
-      techology: ["HTML", "CSS", "JS"],
-      color: "bg-variety-verse",
-      textColor: "text-variety-verse",
-      desktopImg: VarietyVerse_SS1,
-      phoneImg: VarietyVersePhone_SS1,
-      phoneImg2: VarietyVersePhone_SS2,
-      link: "https://bernbit.github.io/Variety-Verse/",
-    },
-    {
-      title: "Tic-Tac-Toe",
-      description:
-        "Tic-Tac-Toe is a classic game that offers a straightforward and enjoyable experience. Players can engage in typical gameplay, making their moves to claim three in a row. The app features sound effects and keyboard support, along with easy-to-follow instructions, ensuring everyone can join in on the fun.",
-      techology: ["HTML", "CSS", "JS"],
-      color: "bg-ttt",
-      textColor: "text-ttt",
-      desktopImg: TTT_SS1,
-      phoneImg: TTTPhone_SS1,
-      phoneImg2: TTTPhone_SS2,
-      link: "https://bernbit.github.io/Let-s-Play-Tic-Tac-Toe/",
-    },
-  ];
-
+  //* useStates
   const [phoneSize, setPhoneSize] = useState("320");
   const [isExpanded, setIsExpanded] = useState(projects.map(() => false));
+  const [desktopImgIndex, setDesktopImgIndex] = useState(projects.map(() => 0));
+  const [phoneImgIndex, setPhoneImgIndex] = useState(projects.map(() => 0));
+  const [imgAnimation, setImageAnimation] = useState("animate__fadeIn");
+  const [showPhone, setShowPhone] = useState(
+    projects.map((project) => project.isApp),
+  );
 
+  const [currentProjectIndex, setCurrentProjectIndex] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
+  const [focusedProjectIndex, setFocusedProjectIndex] = useState(null);
+
+  //* Functions
   const toggleExpand = (index) => {
     const isExpandedCopy = [...isExpanded];
     isExpandedCopy[index] = !isExpandedCopy[index];
     setIsExpanded(isExpandedCopy);
   };
 
-  const { projectRef } = useGeneral();
-  const [showPhone, setShowPhone] = useState(projects.map(() => false));
+  const handlePrevImg = (projectIndex) => {
+    setDesktopImgIndex((prevIndices) =>
+      prevIndices.map((imgNumber, idx) =>
+        idx === projectIndex && imgNumber !== 0 ? imgNumber - 1 : imgNumber,
+      ),
+    );
+  };
+
+  const handleNextImg = (projectIndex) => {
+    setImageAnimation("animate__fadeIn animate__faster");
+    setDesktopImgIndex((prevIndices) =>
+      prevIndices.map((imgNumber, idx) =>
+        idx === projectIndex &&
+        imgNumber !== projects[projectIndex].desktopImg.length - 1
+          ? imgNumber + 1
+          : imgNumber,
+      ),
+    );
+
+    setTimeout(() => setImageAnimation(""), 500); // Reset animation after 1 second
+  };
+
+  const handleNextPhoneImg = (index) => {
+    setPhoneImgIndex((prev) =>
+      prev.map((val, i) =>
+        i === index && val < projects[index].phoneImg.length - 1
+          ? val + 1
+          : val,
+      ),
+    );
+  };
+
+  const handlePrevPhoneImg = (index) => {
+    setPhoneImgIndex((prev) =>
+      prev.map((val, i) => (i === index && val > 0 ? val - 1 : val)),
+    );
+  };
+
   const handleShowPhone = (index) => {
     const showPhoneCopy = [...showPhone];
     showPhoneCopy[index] = !showPhoneCopy[index];
@@ -115,6 +92,29 @@ function Projects() {
     threshold: 0,
   });
 
+  const handleOpenModal = (index) => {
+    setCurrentProjectIndex(index);
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    setCurrentProjectIndex(null);
+  };
+
+  const nextProject = () => {
+    setCurrentProjectIndex(
+      (prev) => (prev < projects.length - 1 ? prev + 1 : 0), // Wrap around
+    );
+  };
+
+  const previousProject = () => {
+    setCurrentProjectIndex(
+      (prev) => (prev > 0 ? prev - 1 : projects.length - 1), // Wrap around
+    );
+  };
+
+  //* useEffects
   useEffect(() => {
     // Window Resize Handler
     const screenSize = window.innerWidth;
@@ -143,6 +143,23 @@ function Projects() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (focusedProjectIndex === null) return;
+
+      if (e.key === "ArrowLeft") {
+        handlePrevImg(focusedProjectIndex);
+        handlePrevPhoneImg(focusedProjectIndex);
+      } else if (e.key === "ArrowRight") {
+        handleNextImg(focusedProjectIndex);
+        handleNextPhoneImg(focusedProjectIndex);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [focusedProjectIndex, desktopImgIndex, phoneImgIndex]);
 
   return (
     <section
@@ -173,29 +190,94 @@ function Projects() {
             className={`mt-7 flex flex-col gap-5 overflow-hidden rounded-md border border-extra bg-tertiary pt-5 shadow-custom dark:border-none dark:bg-dark-tertiary dark:shadow-none md:items-center md:justify-center md:p-10 lg:flex-row ${projectBox ? "animate__animated animate__fadeInUp" : "opacity-0"} `}
             key={index}
             ref={projectBoxRef}
+            onMouseEnter={() => setFocusedProjectIndex(index)}
+            onMouseLeave={() => setFocusedProjectIndex(null)}
           >
-            <div className="relative flex h-96 items-center justify-center px-5 py-3 lg:basis-6/12">
+            <div className="relative flex h-96 flex-col items-center justify-center px-5 py-3 lg:basis-6/12">
               {/* Toggle Device View */}
               {showPhone[index] ? (
-                <div className="flex h-full items-center justify-between gap-5">
-                  <div className="flex h-full items-center justify-between">
-                    <Phone img={project.phoneImg} />
+                <div className="relative flex h-full w-full items-center justify-center gap-5">
+                  <div
+                    className={`absolute left-0 z-10 rounded-full p-2 hover:cursor-pointer ${project.color} ${phoneImgIndex[index] === 0 ? "pointer-events-none opacity-20" : "hover:opacity-80"} `}
+                    onClick={() => handlePrevPhoneImg(index)}
+                  >
+                    <MdArrowBack className="text-lg dark:text-dark-text" />
                   </div>
-                  <div className="hidden h-full items-center justify-between md:flex">
-                    <Phone img={project.phoneImg2} />
+
+                  <div className="flex h-full items-center justify-center">
+                    <Phone img={project.phoneImg[phoneImgIndex[index]]} />
+                  </div>
+
+                  <div
+                    className={`absolute right-0 z-10 rounded-full p-2 hover:cursor-pointer ${project.color} ${phoneImgIndex[index] === project.phoneImg.length - 1 ? "pointer-events-none opacity-20" : "hover:opacity-80"} `}
+                    onClick={() => handleNextPhoneImg(index)}
+                  >
+                    <MdArrowForward className="text-lg dark:text-dark-text" />
                   </div>
                 </div>
               ) : (
-                <div className="flex h-full w-full items-center justify-center">
-                  <Laptop img={project.desktopImg} />
+                <div className="relative flex h-full w-full items-center justify-center">
+                  <Laptop img={project.desktopImg[desktopImgIndex[index]]} />
+
+                  {project.desktopImg.length > 1 && (
+                    <>
+                      {" "}
+                      <div
+                        className={`${project.color} ${desktopImgIndex[index] === 0 ? "pointer-events-none opacity-20" : "opacity-100"} absolute -left-2 top-1/2 -translate-y-1/2 rounded-full p-1 text-dark-text transition-all duration-300 hover:cursor-pointer hover:opacity-75 md:p-2`}
+                        onClick={() => handlePrevImg(index)}
+                      >
+                        <MdArrowBack className="text-lg" />
+                      </div>
+                      <div
+                        className={`${project.color} ${desktopImgIndex[index] === project.desktopImg.length - 1 ? "pointer-events-none opacity-20" : "opacity-100"} absolute -right-2 top-1/2 -translate-y-1/2 rounded-full p-1 text-dark-text transition-all duration-300 hover:cursor-pointer hover:opacity-75 md:p-2`}
+                        onClick={() => handleNextImg(index)}
+                      >
+                        <MdArrowForward className="text-lg" />
+                      </div>
+                    </>
+                  )}
                 </div>
               )}
 
-              {/* Toggle Device Icon */}
+              {/* Circle Indicator */}
+              <div
+                className={`${showPhone[index] ? "mt-6" : "mt-0"} flex gap-1`}
+              >
+                {(showPhone[index] ? project.phoneImg : project.desktopImg).map(
+                  (_, dotIndex) => (
+                    <span
+                      key={dotIndex}
+                      onClick={() => {
+                        if (showPhone[index]) {
+                          setPhoneImgIndex((prev) =>
+                            prev.map((val, i) =>
+                              i === index ? dotIndex : val,
+                            ),
+                          );
+                        } else {
+                          setDesktopImgIndex((prev) =>
+                            prev.map((val, i) =>
+                              i === index ? dotIndex : val,
+                            ),
+                          );
+                        }
+                      }}
+                      className={`h-2 w-2 rounded-full transition-all duration-300 hover:cursor-pointer ${
+                        (showPhone[index]
+                          ? phoneImgIndex[index]
+                          : desktopImgIndex[index]) === dotIndex
+                          ? "bg-black opacity-100 dark:bg-white"
+                          : "bg-black opacity-40 dark:bg-white"
+                      }`}
+                    />
+                  ),
+                )}
+              </div>
             </div>
 
+            {/* Toggle Device Icon */}
             <div
-              className={`${project.color} absolute left-0 top-0 m-5 rounded-full p-2 text-3xl dark:text-dark-text`}
+              className={`${project.color} ${project.isApp ? "hidden" : ""} absolute left-0 top-0 m-5 rounded-full p-2 text-3xl dark:text-dark-text`}
             >
               {showPhone[index] ? (
                 <MdComputer onClick={() => handleShowPhone(index)} />
@@ -239,7 +321,7 @@ function Projects() {
                 <div className="flex flex-wrap justify-center gap-2">
                   {project.techology.map((tech, index) => (
                     <p
-                      className={`${project.color} w-fit rounded-full px-5 py-1 dark:text-dark-text`}
+                      className={`${project.color} ${project.isLightText ? "text-light-text" : "text-dark-text"} w-fit rounded-full px-5 py-1`}
                       key={index}
                     >
                       {tech}
@@ -249,18 +331,28 @@ function Projects() {
               </div>
 
               <div className="md:px-10">
-                <a href={project.link} target="_blank">
-                  <button
-                    className={` ${project.color} relative w-full py-4 text-lg font-semibold tracking-wide hover:cursor-pointer hover:opacity-75 dark:text-dark-text md:rounded-md`}
-                  >
-                    View Project
-                  </button>
-                </a>
+                <button
+                  onClick={() => handleOpenModal(index)}
+                  className={` ${project.color} ${project.isLightText ? "text-light-text" : "text-dark-text"} relative w-full py-4 text-lg font-semibold tracking-wide hover:cursor-pointer hover:opacity-75 md:rounded-md`}
+                >
+                  View Project
+                </button>
               </div>
             </div>
           </div>
         );
       })}
+
+      {/* Modal */}
+      <Modal
+        openModal={openModal}
+        onClose={handleCloseModal}
+        project={projects[currentProjectIndex]}
+        onNext={nextProject}
+        onPrevious={previousProject}
+        hasPrevious={currentProjectIndex > 0}
+        hasNext={currentProjectIndex < projects.length - 1}
+      />
     </section>
   );
 }

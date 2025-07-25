@@ -20,8 +20,12 @@ export default {
         "light-text": "#ffff",
         "dark-accent": "#e60000",
 
-        // Supporting Colors
+        // Projects Colors
+        gkeep: "#bf1a18",
+        balingtech: "#ff803f",
+        pinyaxtact: "#31f354",
         beewatch: "#FDE767",
+        bananacare: "#22b123",
         envirometrix: "#05BFDB",
         "campus-echo": "#15F5BA",
         "variety-verse": "#F48668",

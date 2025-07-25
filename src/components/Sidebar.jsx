@@ -26,7 +26,7 @@ function Sidebar() {
 
   return (
     <nav
-      className={`smoother fixed z-30 grid h-full w-[55%] grid-rows-12 bg-secondary md:hidden dark:bg-dark-secondary ${!showNav ? "-left-full" : "-left-0"} `}
+      className={`smoother fixed z-30 grid h-full w-[55%] grid-rows-12 bg-secondary dark:bg-dark-secondary md:hidden ${!showNav ? "-left-full" : "-left-0"} `}
       ref={navbarRef}
     >
       <div className="row-span-1"></div>
@@ -34,15 +34,14 @@ function Sidebar() {
         <div className="flex w-full flex-col gap-4 text-left">
           <p className="px-3 text-sm text-accent">Menu</p>
           {navOptions.map((option, index) => (
-            <a
-              href={`#${option.label.toLowerCase()}`}
-              className={`flex items-center gap-3 px-3 py-3 hover:cursor-pointer hover:bg-accent hover:text-light-text focus:bg-accent ${activeNav === index ? "bg-accent text-light-text" : "text-dark-text transition-all duration-75 dark:text-light-text"}`}
+            <button
               key={index}
+              className={`flex items-center gap-3 px-3 py-3 hover:cursor-pointer hover:bg-accent hover:text-light-text focus:bg-accent ${activeNav === index ? "bg-accent text-light-text" : "text-dark-text transition-all duration-75 dark:text-light-text"}`}
               onClick={() => handleActiveNav(index)}
             >
               {option.icon}
               <p>{option.label}</p>
-            </a>
+            </button>
           ))}
         </div>
       </div>

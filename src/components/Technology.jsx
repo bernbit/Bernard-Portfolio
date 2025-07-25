@@ -2,6 +2,10 @@ import React from "react";
 import HTMLLogo from "../assets/svg/HTMLLogo";
 import CSSLogo from "../assets/svg/CSSLogo";
 import JSLogo from "../assets/svg/JSLogo";
+import TSLogo from "../assets/svg/TSLogo";
+import NodeJSLogo from "../assets/svg/NodeJSLogo";
+import NextJSLogo from "../assets/svg/NextJSLogo";
+import ExpoLogo from "../assets/svg/ExpoLogo";
 import BootstrapLogo from "../assets/svg/BootstrapLogo";
 import TailwindLogo from "../assets/svg/TailwindLogo";
 import ReactLogo from "../assets/svg/ReactLogo";
@@ -9,33 +13,52 @@ import FigmaLogo from "../assets/svg/FigmaLogo";
 import PhotoshopLogo from "../assets/svg/PhotoshopLogo";
 import ESPLogo from "../assets/svg/ESPLogo";
 import FirebaseLogo from "../assets/svg/FirebaseLogo";
+import PrismaLogo from "../assets/svg/PrismaLogo";
 import ArduinoLogo from "../assets/svg/ArduinoLogo";
 import CPlusPlusLogo from "../assets/svg/CPlusPlusLogo";
 import CSharpLogo from "../assets/svg/CSharpLogo";
 import GitLogo from "../assets/svg/GitLogo";
 import GitHubLogo from "../assets/svg/GitHubLogo";
 import VSCodeLogo from "../assets/svg/VSCodeLogo";
+import ViteLogo from "../assets/svg/ViteLogo";
 
 import { useInView } from "react-intersection-observer";
 
 function Technology() {
   const technologies = [
+    // --- Web Development ---
     { logo: HTMLLogo, title: "HTML" },
     { logo: CSSLogo, title: "CSS" },
     { logo: JSLogo, title: "JavaScript" },
-    { logo: BootstrapLogo, title: "Bootstrap" },
-    { logo: TailwindLogo, title: "Tailwind CSS" },
+    { logo: TSLogo, title: "Typescript" },
+    { logo: NodeJSLogo, title: "Node JS" },
     { logo: ReactLogo, title: "React" },
-    { logo: FigmaLogo, title: "Figma" },
-    { logo: PhotoshopLogo, title: "Photoshop" },
-    { logo: ESPLogo, title: "ESP32" },
+    { logo: NextJSLogo, title: "Next.js" },
+    { logo: ExpoLogo, title: "Expo" },
+    { logo: TailwindLogo, title: "Tailwind CSS" },
+    { logo: BootstrapLogo, title: "Bootstrap" },
+    { logo: ViteLogo, title: "Vite" },
+
+    // ---  Database ---
     { logo: FirebaseLogo, title: "Firebase" },
-    { logo: ArduinoLogo, title: "Arduino" },
+    { logo: PrismaLogo, title: "Prisma" },
+
+    // --- Programming Languages ---
     { logo: CPlusPlusLogo, title: "C++" },
     { logo: CSharpLogo, title: "C#" },
+
+    // --- Tools & Version Control ---
     { logo: GitLogo, title: "Git" },
     { logo: GitHubLogo, title: "GitHub" },
     { logo: VSCodeLogo, title: "VS Code" },
+
+    // --- Hardware & IoT ---
+    { logo: ArduinoLogo, title: "Arduino" },
+    { logo: ESPLogo, title: "ESP32" },
+
+    // --- Design Tools ---
+    { logo: FigmaLogo, title: "Figma" },
+    { logo: PhotoshopLogo, title: "Photoshop" },
   ];
 
   const { ref: techTitleRef, inView: techTitle } = useInView({

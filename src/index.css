@@ -136,6 +136,10 @@ html {
 }
 
 .border-test {
+  border: 1px red solid;
+}
+
+.border-test-yellow {
   border: 1px yellow solid;
 }
 
