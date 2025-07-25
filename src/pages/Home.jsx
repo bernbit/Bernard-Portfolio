@@ -20,7 +20,7 @@ import NextJSLogo from "../assets/svg/NextJSLogo";
 import { useInView } from "react-intersection-observer";
 
 function Home() {
-  const { homeRef, showResume, setShowResume } = useGeneral();
+  const { homeRef, showResume, setShowResume, handleActiveNav } = useGeneral();
   const logos = [
     {
       name: "React",
@@ -175,12 +175,15 @@ function Home() {
           >
             View Resume
           </button>
-          <a href="#projects" className="flex items-center gap-2 px-6 py-3">
+          <button
+            className="flex items-center gap-2 px-6 py-3"
+            onClick={() => handleActiveNav(2)}
+          >
             Projects{" "}
             <span>
               <MdArrowOutward />
             </span>
-          </a>
+          </button>
         </div>
       </div>
     </section>
